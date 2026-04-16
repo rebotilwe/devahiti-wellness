@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowRight, MapPin, Star } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { ArrowRight, Waves, Droplets, MapPin, Star } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import ServiceCard from "../components/ServiceCard";
-import TestimonialCard from "../components/TestimonialCard";
 
 const services = [
   {
@@ -50,60 +50,204 @@ const services = [
   },
 ];
 
+// Animated text words for rotation
+const animatedWords = [
+  "Breathe",
+  "Center",
+  "Align",
+  "Flow",
+  "Release",
+  "Restore"
+];
+
+const breathingSteps = [
+  { label: "Inhale", duration: 4000, scale: 1.6 },
+  { label: "Hold", duration: 3000, scale: 1.6 },
+  { label: "Exhale", duration: 5000, scale: 1 },
+];
+
 export default function Home() {
+  const [showHero, setShowHero] = useState(false);
+  const [stepIndex, setStepIndex] = useState(0);
+  const [isRunning, setIsRunning] = useState(true);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+
+  const currentStep = breathingSteps[stepIndex];
+
+  // Lock scroll when intro is active
+  useEffect(() => {
+    if (!showHero) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [showHero]);
+
+  // Breathing Engine
+  useEffect(() => {
+    if (!isRunning || showHero) return;
+
+    const timer = setTimeout(() => {
+      if (stepIndex < breathingSteps.length - 1) {
+        setStepIndex((prev) => prev + 1);
+      } else {
+        setIsRunning(false);
+        setTimeout(() => setShowHero(true), 1000);
+      }
+    }, currentStep.duration);
+
+    return () => clearTimeout(timer);
+  }, [stepIndex, isRunning, showHero, currentStep.duration]);
+
+  // Rotate through animated words (only after hero shows)
+  useEffect(() => {
+    if (!showHero) return;
+    const interval = setInterval(() => {
+      setIsVisible(false);
+      setTimeout(() => {
+        setCurrentWordIndex((prev) => (prev + 1) % animatedWords.length);
+        setIsVisible(true);
+      }, 300);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, [showHero]);
+
+  if (!showHero) {
+    return (
+      <section className="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="absolute inset-0 bg-gradient-to-br from-ocean/20 via-black to-ocean/10" 
+        />
+
+        <div className="relative z-10 flex flex-col items-center text-center px-6">
+          <motion.div
+            animate={{ scale: currentStep.scale }}
+            transition={{ duration: currentStep.duration / 1000, ease: "easeInOut" }}
+            className="w-48 h-48 rounded-full bg-ocean/20 border border-ocean/30 flex items-center justify-center backdrop-blur-sm"
+          >
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={currentStep.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.1 }}
+                className="text-white text-sm tracking-[0.3em] uppercase font-light"
+              >
+                {currentStep.label}
+              </motion.span>
+            </AnimatePresence>
+          </motion.div>
+
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.6 }}
+            className="text-white mt-10 text-xs tracking-[0.4em] uppercase font-light"
+          >
+            Breathe with awareness
+          </motion.p>
+
+          <button
+            onClick={() => setShowHero(true)}
+            className="mt-12 text-[10px] text-white/40 tracking-[0.2em] uppercase underline underline-offset-8 hover:text-ocean-light transition-colors"
+          >
+            Skip Intro
+          </button>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <div>
-      {/* Hero */}
-      <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 1.2 }}
+    >
+      {/* HERO SECTION with Animated Text */}
+      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8a896dbea_generated_4254f10c.png"
-            alt="Yoga practice session"
             className="w-full h-full object-cover"
+            alt="Yoga Practice"
           />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-ocean/30 to-transparent" />
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-xs tracking-[0.4em] uppercase text-white/70 mb-6"
-          >
-            Welcome To Devahiti
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-heading text-4xl md:text-6xl lg:text-7xl font-light text-white leading-tight mb-4"
-          >
-            Educational Yoga Studio
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-white/80 font-light mb-10 max-w-2xl mx-auto"
-          >
-            Aligning Mind, Body and Spirit through Asana, Pranayama, Mantra, Sound and Meditation
-          </motion.p>
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            transition={{ delay: 0.3 }}
+            className="flex items-center justify-center gap-3 mb-8"
+          >
+            <Waves className="h-4 w-4 text-ocean-light/60" />
+            <span className="text-[10px] tracking-[0.5em] uppercase text-white/70">Welcome to Devahiti</span>
+            <Waves className="h-4 w-4 text-ocean-light/60" />
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="font-heading text-5xl md:text-7xl lg:text-8xl font-light text-white leading-[1.1]"
+          >
+            Educational <br /> <span className="italic font-serif">Yoga Studio</span>
+          </motion.h1>
+
+          {/* Slogan + Animated Rotating Words */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="mt-6"
+          >
+            <p className="text-white/70 text-base md:text-lg font-light mb-2">
+              "If you can breathe, you can do yoga"
+            </p>
+            <div className="flex items-center justify-center gap-2 flex-wrap">
+              <span className="text-white/50 text-sm tracking-wide">Find your flow —</span>
+              <div className="relative inline-block min-w-[120px] text-center">
+                <motion.span
+                  animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 10 }}
+                  transition={{ duration: 0.3 }}
+                  className="text-ocean-light text-lg md:text-xl font-heading font-light inline-block"
+                >
+                  {animatedWords[currentWordIndex]}
+                </motion.span>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9, duration: 1 }}
+            className="text-white/60 mt-6 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed"
+          >
+            Aligning Mind, Body and Spirit through Asana, Pranayama, Mantra, Sound and Meditation.
+          </motion.p>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1 }}
+            className="flex flex-col sm:flex-row gap-5 justify-center mt-12"
           >
             <Link
               to="/booking"
-              className="px-10 py-4 bg-primary text-primary-foreground text-xs font-medium tracking-[0.3em] uppercase hover:bg-primary/90 transition-all duration-300"
+              className="px-12 py-4 bg-ocean text-white text-[11px] font-medium uppercase tracking-[0.3em] hover:bg-ocean-dark transition-all rounded-sm shadow-xl shadow-ocean/10"
             >
               Free Trial Class
             </Link>
             <Link
               to="/services"
-              className="px-10 py-4 border border-white/30 text-white text-xs font-medium tracking-[0.3em] uppercase hover:bg-white/10 transition-all duration-300"
+              className="px-12 py-4 border border-white/20 text-white text-[11px] font-medium uppercase tracking-[0.3em] hover:bg-white/10 transition-all rounded-sm backdrop-blur-sm"
             >
               View Services
             </Link>
@@ -115,14 +259,36 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <div className="w-px h-16 bg-gradient-to-b from-transparent to-white/50" />
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-white/30 text-[8px] tracking-[0.3em] uppercase">Scroll</span>
+            <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/30" />
+          </div>
         </motion.div>
       </section>
 
-      {/* Devahiti Meaning Section */}
-      <section className="py-20 lg:py-28 px-6 bg-muted/50">
+      {/* SLOGAN HIGHLIGHT SECTION */}
+      <section className="py-20 px-6 bg-ocean/5 border-y border-ocean/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            <Droplets className="h-10 w-10 text-ocean/40 mx-auto mb-6" />
+            <p className="font-heading text-2xl md:text-3xl lg:text-4xl text-ocean italic mb-4 leading-relaxed">
+              "If you can breathe, you can do yoga"
+            </p>
+            <p className="text-[10px] text-muted-foreground tracking-[0.4em] uppercase">
+              — The Core Philosophy of Devahiti —
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* DEVAHITI MEANING SECTION (Sanskrit) */}
+      <section className="py-20 lg:py-28 px-6 bg-gradient-to-b from-white to-ocean/5">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -130,8 +296,13 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
+            <div className="flex justify-center mb-6">
+              <div className="w-12 h-px bg-ocean/30" />
+              <span className="mx-3 text-ocean/50 text-xs">✦</span>
+              <div className="w-12 h-px bg-ocean/30" />
+            </div>
             <p className="font-heading text-2xl md:text-3xl lg:text-4xl text-foreground leading-relaxed mb-6">
-              Devahiti is a Sanskrit word meaning <span className="text-primary">Divine</span> or <span className="text-primary">Natural Order</span>.
+              Devahiti is a Sanskrit word meaning <span className="text-ocean">Divine</span> or <span className="text-ocean">Natural Order</span>.
             </p>
             <p className="text-base text-muted-foreground leading-relaxed">
               Our educational Yoga Studio specialises in Somatic psychology to align Mind, Body and Spirit, 
@@ -141,7 +312,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Philosophy Section */}
+      {/* PHILOSOPHY SECTION (Rooted in Science) */}
       <section className="py-20 lg:py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -152,11 +323,13 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <div className="relative">
+                <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-ocean/30 rounded-tl-2xl" />
                 <img
                   src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/b9d7d7c6d_generated_c5fd17b8.png"
                   alt="Yoga practice"
-                  className="w-full max-w-md mx-auto lg:mx-0 object-cover"
+                  className="w-full max-w-md mx-auto lg:mx-0 object-cover relative z-10"
                 />
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-ocean/30 rounded-br-2xl" />
               </div>
             </motion.div>
 
@@ -167,7 +340,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
-              <p className="text-xs tracking-[0.3em] uppercase text-primary">
+              <p className="text-xs tracking-[0.3em] uppercase text-ocean">
                 Rooted in Science & Tradition
               </p>
               <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-foreground leading-tight">
@@ -181,12 +354,15 @@ export default function Home() {
                 Using traditional methods of Yoga, eclectic movement practices, sound, and methods of deep 
                 relaxation to increase mindfulness and improve cognitive processes.
               </p>
-              <p className="text-sm text-primary font-medium italic font-heading text-lg">
-                "If you can breathe, you can do yoga!"
-              </p>
+              
+              <div className="bg-ocean/5 p-4 rounded-lg border-l-4 border-ocean">
+                <p className="text-ocean font-heading text-lg italic">
+                  "If you can breathe, you can do yoga!"
+                </p>
+              </div>
 
               <div className="flex items-center gap-2 pt-2">
-                <MapPin className="h-4 w-4 text-primary" />
+                <MapPin className="h-4 w-4 text-ocean" />
                 <p className="text-sm text-muted-foreground">
                   Welcoming all practitioners from beginners through advanced and special needs
                 </p>
@@ -194,7 +370,7 @@ export default function Home() {
 
               <Link
                 to="/about"
-                className="inline-flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-primary hover:gap-4 transition-all duration-300 pt-4"
+                className="inline-flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-ocean hover:gap-4 transition-all duration-300 pt-4"
               >
                 Learn More About Us <ArrowRight className="h-4 w-4" />
               </Link>
@@ -203,8 +379,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Preview */}
-      <section className="py-20 lg:py-32 px-6 bg-muted/50">
+      {/* SERVICES PREVIEW */}
+      <section className="py-24 px-6 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
             subtitle="What We Offer"
@@ -212,16 +388,16 @@ export default function Home() {
             description="We offer a variety of classes suitable for all levels, from beginners to advanced practitioners."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mt-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mt-20">
             {services.map((service, i) => (
-              <ServiceCard key={service.title} {...service} index={i} />
+              <ServiceCard key={i} {...service} index={i} />
             ))}
           </div>
 
           <div className="text-center mt-16">
             <Link
               to="/services"
-              className="inline-flex items-center gap-3 px-10 py-4 border border-foreground/20 text-xs font-medium tracking-[0.3em] uppercase text-foreground hover:bg-foreground hover:text-background transition-all duration-500"
+              className="inline-flex items-center gap-3 px-10 py-4 border border-ocean/30 text-ocean text-xs font-medium tracking-[0.3em] uppercase hover:bg-ocean hover:text-white transition-all duration-500 rounded-sm"
             >
               View All Classes <ArrowRight className="h-4 w-4" />
             </Link>
@@ -229,7 +405,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Quote Banner */}
+      {/* QUOTE BANNER */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -237,7 +413,7 @@ export default function Home() {
             alt="Peaceful yoga setting"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-foreground/60" />
+          <div className="absolute inset-0 bg-ocean-dark/70" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
           <motion.div
@@ -246,10 +422,11 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
+            <Waves className="h-8 w-8 text-white/40 mx-auto mb-4" />
             <p className="font-heading text-2xl md:text-3xl lg:text-4xl italic text-white leading-relaxed mb-6">
               "I strive to encourage those who think 'they can't do yoga', to become those who can...
             </p>
-            <p className="font-heading text-xl md:text-2xl text-primary-foreground/90 italic">
+            <p className="font-heading text-xl md:text-2xl text-white/90 italic">
               because if you can breathe, you can do yoga!"
             </p>
             <p className="text-sm text-white/60 mt-6">
@@ -259,8 +436,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Teacher Training CTA */}
-      <section className="py-20 lg:py-28 px-6 bg-primary">
+      {/* TEACHER TRAINING CTA */}
+      <section className="py-20 lg:py-28 px-6 bg-ocean">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -270,22 +447,22 @@ export default function Home() {
           >
             <div className="flex justify-center gap-1 mb-6">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-4 w-4 fill-primary-foreground/30 text-primary-foreground/30" />
+                <Star key={i} className="h-4 w-4 fill-white/30 text-white/30" />
               ))}
             </div>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-primary-foreground mb-4">
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-white mb-4">
               200 hour and 300 hour Advanced Teacher Training
             </h2>
-            <p className="text-xl text-primary-foreground/80 mb-4">
+            <p className="text-xl text-white/80 mb-4">
               Starts in May 2026
             </p>
-            <p className="text-base text-primary-foreground/70 leading-relaxed mb-8 max-w-2xl mx-auto">
+            <p className="text-base text-white/70 leading-relaxed mb-8 max-w-2xl mx-auto">
               Join our comprehensive teacher training program and deepen your practice. 
               Become a certified yoga instructor and share this ancient art and science with others.
             </p>
             <Link
               to="/booking"
-              className="inline-flex px-10 py-4 bg-background text-foreground text-xs font-medium tracking-[0.3em] uppercase hover:bg-background/90 transition-all duration-300"
+              className="inline-flex px-10 py-4 bg-white text-ocean text-xs font-medium tracking-[0.3em] uppercase hover:bg-white/90 transition-all duration-300 rounded-sm"
             >
               Enquire Now
             </Link>
@@ -293,7 +470,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Free Trial CTA */}
+      {/* FREE TRIAL CTA */}
       <section className="py-20 lg:py-28 px-6 bg-background">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-heading text-3xl md:text-4xl font-light text-foreground mb-4">
@@ -305,12 +482,12 @@ export default function Home() {
           </p>
           <Link
             to="/booking"
-            className="inline-flex items-center gap-3 px-10 py-4 bg-primary text-primary-foreground text-xs font-medium tracking-[0.3em] uppercase hover:bg-primary/90 transition-all duration-300"
+            className="inline-flex items-center gap-3 px-10 py-4 bg-ocean text-white text-xs font-medium tracking-[0.3em] uppercase hover:bg-ocean-dark transition-all duration-300 rounded-sm"
           >
             Claim Your Free Class <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 }
