@@ -200,23 +200,24 @@ export default function Home() {
             Educational <br /> <span className="italic font-serif">Yoga Studio</span>
           </motion.h1>
 
-          {/* Slogan + Animated Rotating Words */}
+          {/* Slogan + Animated Rotating Words - FIXED VISIBILITY */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
             className="mt-6"
           >
-            <p className="text-white/70 text-base md:text-lg font-light mb-2">
+            <p className="text-white/80 text-base md:text-lg font-light mb-2">
               "If you can breathe, you can do yoga"
             </p>
             <div className="flex items-center justify-center gap-2 flex-wrap">
-              <span className="text-white/50 text-sm tracking-wide">Find your flow —</span>
-              <div className="relative inline-block min-w-[120px] text-center">
+              <span className="text-white/60 text-sm tracking-wide">Find your flow —</span>
+              <div className="relative inline-block min-w-[130px] text-center">
                 <motion.span
                   animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 10 }}
                   transition={{ duration: 0.3 }}
-                  className="text-ocean-light text-lg md:text-xl font-heading font-light inline-block"
+                  className="text-white text-lg md:text-2xl font-heading font-semibold inline-block drop-shadow-lg"
+                  style={{ color: '#8fc9d1', textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
                 >
                   {animatedWords[currentWordIndex]}
                 </motion.span>
