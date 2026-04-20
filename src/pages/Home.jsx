@@ -7,64 +7,83 @@ import ServiceCard from "../components/ServiceCard";
 
 const services = [
   {
+    id: "group",
     title: "Group Yoga Classes",
-    description: "Join our community classes suitable for all levels. Experience the benefits of traditional yoga in a supportive group environment.",
-    duration: "1 hr 15 min",
-    price: "From $25",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/c514b05a9_generated_8e04c8ff.png",
+    description:
+      "Suitable for all levels, including beginners. Move, breathe, and unwind in a calm and supportive space.",
+    duration: "45 – 90 min",
+    price: "R130 drop-in",
+    image:
+      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/c514b05a9_generated_8e04c8ff.png",
+    bookingType: "group",
   },
   {
+    id: "sound",
     title: "Sound Journey",
-    description: "A deeply immersive sound experience using Tibetan singing bowls and resonant instruments to reduce anxiety and promote profound rest.",
-    duration: "1 hr 15 min",
-    price: "From $35",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/90b6a8f9b_generated_85845fa4.png",
+    description:
+      "A deeply immersive sound experience to reduce stress and promote deep rest through healing frequencies and vibration.",
+    duration: "60 – 75 min",
+    price: "From R800",
+    image:
+      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/90b6a8f9b_generated_85845fa4.png",
+    bookingType: "sound",
   },
   {
+    id: "private",
     title: "Private Yoga Sessions",
-    description: "One-on-one personalized instruction tailored to your specific needs, goals, and body. Perfect for beginners or advanced practitioners.",
-    duration: "1 hr",
-    price: "From $65",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/0ce063086_generated_ab60dfbd.png",
+    description:
+      "Personalised one-on-one sessions at your home or accommodation. Tailored to your needs and goals.",
+    duration: "60 min",
+    price: "R650 (R150 per extra person)",
+    image:
+      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/0ce063086_generated_ab60dfbd.png",
+    bookingType: "private",
   },
   {
-    title: "Corporate Yoga",
-    description: "Bring wellness to your workplace. Group sessions designed to reduce stress, improve focus, and boost team morale.",
-    duration: "1 hr",
-    price: "From $150",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8a896dbea_generated_4254f10c.png",
+    id: "corporate",
+    title: "Corporate & Group Sessions",
+    description:
+      "Wellness experiences for teams, retreats, or private groups. Reduce stress and reconnect through guided sessions.",
+    duration: "75 min",
+    price: "R1999 (up to 8 people)",
+    image:
+      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8a896dbea_generated_4254f10c.png",
+    bookingType: "corporate",
   },
   {
+    id: "yin",
     title: "Yin Yoga",
-    description: "A slow-paced style of yoga with postures held for longer periods to target deep connective tissues and increase circulation.",
-    duration: "1 hr 15 min",
-    price: "From $25",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/85db9c9b2_generated_53ef1b3a.png",
+    description:
+      "Slow-paced yoga focused on deep tissue release, relaxation, and mindfulness.",
+    duration: "90 min",
+    price: "Included in group classes",
+    image:
+      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/85db9c9b2_generated_53ef1b3a.png",
+    bookingType: "yin",
   },
   {
+    id: "training",
     title: "Teacher Training",
-    description: "200 hour and 300 hour advanced teacher training programs. Start your journey to becoming a certified yoga instructor.",
-    duration: "Multiple sessions",
-    price: "Inquire for pricing",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/b9d7d7c6d_generated_c5fd17b8.png",
+    description:
+      "200-hour and 300-hour advanced yoga teacher training programs starting May 2026.",
+    duration: "Multi-month program",
+    price: "Enquire for pricing",
+    image:
+      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/b9d7d7c6d_generated_c5fd17b8.png",
+    bookingType: "enquire",
   },
 ];
 
-// Animated text words for rotation
-const animatedWords = [
-  "Breathe",
-  "Center",
-  "Align",
-  "Flow",
-  "Release",
-  "Restore"
-];
+const animatedWords = ["Breathe", "Center", "Align", "Flow", "Release", "Restore"];
 
 const breathingSteps = [
   { label: "Inhale", duration: 4000, scale: 1.6 },
   { label: "Hold", duration: 3000, scale: 1.6 },
   { label: "Exhale", duration: 5000, scale: 1 },
 ];
+
+// Calendly URL
+const CALENDLY_URL = "https://calendly.com/cheryl-sayogasafaris";
 
 export default function Home() {
   const [showHero, setShowHero] = useState(false);
@@ -75,17 +94,17 @@ export default function Home() {
 
   const currentStep = breathingSteps[stepIndex];
 
-  // Lock scroll when intro is active
   useEffect(() => {
     if (!showHero) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
-    return () => { document.body.style.overflow = 'unset'; };
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [showHero]);
 
-  // Breathing Engine
   useEffect(() => {
     if (!isRunning || showHero) return;
 
@@ -101,7 +120,6 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [stepIndex, isRunning, showHero, currentStep.duration]);
 
-  // Rotate through animated words (only after hero shows)
   useEffect(() => {
     if (!showHero) return;
     const interval = setInterval(() => {
@@ -117,16 +135,19 @@ export default function Home() {
   if (!showHero) {
     return (
       <section className="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="absolute inset-0 bg-gradient-to-br from-ocean/20 via-black to-ocean/10" 
+          className="absolute inset-0 bg-gradient-to-br from-ocean/20 via-black to-ocean/10"
         />
 
         <div className="relative z-10 flex flex-col items-center text-center px-6">
           <motion.div
             animate={{ scale: currentStep.scale }}
-            transition={{ duration: currentStep.duration / 1000, ease: "easeInOut" }}
+            transition={{
+              duration: currentStep.duration / 1000,
+              ease: "easeInOut",
+            }}
             className="w-48 h-48 rounded-full bg-ocean/20 border border-ocean/30 flex items-center justify-center backdrop-blur-sm"
           >
             <AnimatePresence mode="wait">
@@ -142,7 +163,7 @@ export default function Home() {
             </AnimatePresence>
           </motion.div>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.6 }}
             className="text-white mt-10 text-xs tracking-[0.4em] uppercase font-light"
@@ -162,11 +183,7 @@ export default function Home() {
   }
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }} 
-      transition={{ duration: 1.2 }}
-    >
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2 }}>
       {/* HERO SECTION with Animated Text */}
       <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -180,27 +197,31 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+          {/* Welcome Badge with Wave */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ duration: 0.8 }}
             className="flex items-center justify-center gap-3 mb-8"
           >
             <Waves className="h-4 w-4 text-ocean-light/60" />
-            <span className="text-[10px] tracking-[0.5em] uppercase text-white/70">Welcome to Devahiti</span>
+            <span className="text-[10px] tracking-[0.5em] uppercase text-white/70">
+              Welcome to Devahiti
+            </span>
             <Waves className="h-4 w-4 text-ocean-light/60" />
           </motion.div>
 
+          {/* Main Title */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
             className="font-heading text-5xl md:text-7xl lg:text-8xl font-light text-white leading-[1.1]"
           >
-            Educational <br /> <span className="italic font-serif">Yoga Studio</span>
+            Yoga & <br /> <span className="italic font-serif">Movement Studio</span>
           </motion.h1>
 
-          {/* Slogan + Animated Rotating Words - FIXED VISIBILITY */}
+          {/* Slogan + Animated Rotating Words */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -225,27 +246,43 @@ export default function Home() {
             </div>
           </motion.div>
 
+          {/* Description */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9, duration: 1 }}
             className="text-white/60 mt-6 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed"
           >
-            Aligning Mind, Body and Spirit through Asana, Pranayama, Mantra, Sound and Meditation.
+            Open-air yoga and movement studio in Ballito. Private sessions, group classes, 
+            sound journeys, and wellness experiences — all equipment provided.
           </motion.p>
 
-          <motion.div 
+          {/* Location */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="flex items-center justify-center gap-2 mt-4 text-white/60 text-sm"
+          >
+            <MapPin className="h-4 w-4" />
+            Ballito, South Africa
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1 }}
             className="flex flex-col sm:flex-row gap-5 justify-center mt-12"
           >
-            <Link
-              to="/booking"
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-12 py-4 bg-ocean text-white text-[11px] font-medium uppercase tracking-[0.3em] hover:bg-ocean-dark transition-all rounded-sm shadow-xl shadow-ocean/10"
             >
               Free Trial Class
-            </Link>
+            </a>
             <Link
               to="/services"
               className="px-12 py-4 border border-white/20 text-white text-[11px] font-medium uppercase tracking-[0.3em] hover:bg-white/10 transition-all rounded-sm backdrop-blur-sm"
@@ -269,8 +306,8 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* SLOGAN HIGHLIGHT SECTION */}
-      <section className="py-20 px-6 bg-ocean/5 border-y border-ocean/10">
+      {/* Client Message Section */}
+      <section className="py-20 lg:py-28 px-6 bg-ocean/5 border-y border-ocean/10">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -279,16 +316,17 @@ export default function Home() {
           >
             <Droplets className="h-10 w-10 text-ocean/40 mx-auto mb-6" />
             <p className="font-heading text-2xl md:text-3xl lg:text-4xl text-ocean italic mb-4 leading-relaxed">
-              "If you can breathe, you can do yoga"
+              "Unwind with family and friends as you reduce stress through mindful movement, 
+              followed by a nurturing sound journey — leaving you feeling relaxed and restored."
             </p>
-            <p className="text-[10px] text-muted-foreground tracking-[0.4em] uppercase">
-              — The Core Philosophy of Devahiti —
+            <p className="text-sm text-muted-foreground mt-4">
+              Sessions suitable for everybody. Beginners are always welcome ✨
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* DEVAHITI MEANING SECTION (Sanskrit) */}
+      {/* Devahiti Meaning Section */}
       <section className="py-20 lg:py-28 px-6 bg-gradient-to-b from-white to-ocean/5">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -303,17 +341,14 @@ export default function Home() {
               <div className="w-12 h-px bg-ocean/30" />
             </div>
             <p className="font-heading text-2xl md:text-3xl lg:text-4xl text-foreground leading-relaxed mb-6">
-              Devahiti is a Sanskrit word meaning <span className="text-ocean">Divine</span> or <span className="text-ocean">Natural Order</span>.
-            </p>
-            <p className="text-base text-muted-foreground leading-relaxed">
-              Our educational Yoga Studio specialises in Somatic psychology to align Mind, Body and Spirit, 
-              holistically, with Asana, Pranayama, Mantra, Sound and Meditation.
+              Devahiti is a Sanskrit word meaning <span className="text-ocean">Divine</span> or{" "}
+              <span className="text-ocean">Natural Order</span>.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* PHILOSOPHY SECTION (Rooted in Science) */}
+      {/* Philosophy Section */}
       <section className="py-20 lg:py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -351,42 +386,24 @@ export default function Home() {
                 Rooted in science and evidence-based movement practices, in conjunction with time-honoured 
                 yogic principles, Devahiti Yoga is designed to facilitate alignment and harmony.
               </p>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                Using traditional methods of Yoga, eclectic movement practices, sound, and methods of deep 
-                relaxation to increase mindfulness and improve cognitive processes.
-              </p>
-              
+
               <div className="bg-ocean/5 p-4 rounded-lg border-l-4 border-ocean">
                 <p className="text-ocean font-heading text-lg italic">
                   "If you can breathe, you can do yoga!"
                 </p>
               </div>
-
-              <div className="flex items-center gap-2 pt-2">
-                <MapPin className="h-4 w-4 text-ocean" />
-                <p className="text-sm text-muted-foreground">
-                  Welcoming all practitioners from beginners through advanced and special needs
-                </p>
-              </div>
-
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-ocean hover:gap-4 transition-all duration-300 pt-4"
-              >
-                Learn More About Us <ArrowRight className="h-4 w-4" />
-              </Link>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* SERVICES PREVIEW */}
+      {/* Services Preview */}
       <section className="py-24 px-6 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
             subtitle="What We Offer"
-            title="Our Yoga Classes"
-            description="We offer a variety of classes suitable for all levels, from beginners to advanced practitioners."
+            title="Our Classes & Experiences"
+            description="Whether you are just beginning or deepening your journey, our offerings are designed to support your mind, body and spirit."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mt-20">
@@ -406,7 +423,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* QUOTE BANNER */}
+      {/* Quote Banner */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -437,7 +454,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TEACHER TRAINING CTA */}
+      {/* Teacher Training CTA */}
       <section className="py-20 lg:py-28 px-6 bg-ocean">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
@@ -452,26 +469,26 @@ export default function Home() {
               ))}
             </div>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-white mb-4">
-              200 hour and 300 hour Advanced Teacher Training
+              200 hour & 300 hour Advanced Teacher Training
             </h2>
             <p className="text-xl text-white/80 mb-4">
-              Starts in May 2026
+              200hr: Starts May 16-17, 2026 | 300hr: Starts May 2-3, 2026
             </p>
             <p className="text-base text-white/70 leading-relaxed mb-8 max-w-2xl mx-auto">
-              Join our comprehensive teacher training program and deepen your practice. 
-              Become a certified yoga instructor and share this ancient art and science with others.
+              Deepen your practice and become a certified instructor. Our comprehensive training programs 
+              are rooted in science and time-honoured yogic principles.
             </p>
             <Link
-              to="/booking"
+              to="/contact"
               className="inline-flex px-10 py-4 bg-white text-ocean text-xs font-medium tracking-[0.3em] uppercase hover:bg-white/90 transition-all duration-300 rounded-sm"
             >
-              Enquire Now
+              Enquire About Training
             </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* FREE TRIAL CTA */}
+      {/* Free Trial CTA */}
       <section className="py-20 lg:py-28 px-6 bg-background">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-heading text-3xl md:text-4xl font-light text-foreground mb-4">
@@ -481,12 +498,14 @@ export default function Home() {
             We invite you to take a free trial class with us whenever you are ready to dip 
             your toes into this beautiful practice that is yoga.
           </p>
-          <Link
-            to="/booking"
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-10 py-4 bg-ocean text-white text-xs font-medium tracking-[0.3em] uppercase hover:bg-ocean-dark transition-all duration-300 rounded-sm"
           >
             Claim Your Free Class <ArrowRight className="h-4 w-4" />
-          </Link>
+          </a>
         </div>
       </section>
     </motion.div>

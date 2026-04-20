@@ -2,7 +2,24 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Clock, ArrowRight } from "lucide-react";
 
-export default function ServiceCard({ title, description, duration, price, image, index = 0 }) {
+export default function ServiceCard({ title, description, duration, price, image, index = 0, bookingType = "group" }) {
+  // Determine if this is an "enquire" type (Teacher Training)
+  const isEnquire = bookingType === "enquire" || title === "Teacher Training";
+  
+  // Determine the booking link
+  const getBookingLink = () => {
+    if (isEnquire) return "/contact";
+    if (bookingType === "free") return "/booking?type=free";
+    return `/booking?type=${bookingType}`;
+  };
+  
+  // Determine button text
+  const getButtonText = () => {
+    if (isEnquire) return "Enquire";
+    if (bookingType === "free") return "Book Free";
+    return "Book Now";
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -35,16 +52,20 @@ export default function ServiceCard({ title, description, duration, price, image
               </span>
             )}
             {price && (
-              <span className="text-sm font-medium text-primary">
+              <span className={`text-sm font-medium ${isEnquire ? "text-ocean" : "text-ocean"}`}>
                 {price}
               </span>
             )}
           </div>
           <Link
-            to="/booking"
-            className="flex items-center gap-2 text-xs tracking-widest uppercase text-primary hover:gap-3 transition-all duration-300"
+            to={getBookingLink()}
+            className={`flex items-center gap-2 text-xs tracking-widest uppercase transition-all duration-300 ${
+              isEnquire 
+                ? "text-ocean hover:gap-3" 
+                : "text-ocean hover:gap-3"
+            }`}
           >
-            Book <ArrowRight className="h-3.5 w-3.5" />
+            {getButtonText()} <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </div>

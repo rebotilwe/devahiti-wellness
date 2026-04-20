@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Waves, Droplets, Mail, Phone, MapPin } from "lucide-react";
 
 export default function About() {
   return (
@@ -14,181 +14,221 @@ export default function About() {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-ocean/20 to-transparent" />
         </div>
         <div className="relative z-10 text-center px-6">
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-xs tracking-[0.4em] uppercase text-white/60 mb-4"
+            className="flex items-center justify-center gap-2 mb-4"
           >
-            Welcome To Devahiti
-          </motion.p>
+            <Waves className="h-4 w-4 text-white/60" />
+            <span className="text-xs tracking-[0.4em] uppercase text-white/60">
+              Welcome To Devahiti
+            </span>
+            <Waves className="h-4 w-4 text-white/60" />
+          </motion.div>
+
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ delay: 0.2 }}
             className="font-heading text-4xl md:text-6xl lg:text-7xl font-light text-white"
           >
-            Educational Yoga Studio
+            A Beautiful Open-Air Yoga Studio
           </motion.h1>
         </div>
       </section>
 
-      {/* Devahiti Meaning Section */}
-      <section className="py-20 lg:py-28 px-6 bg-muted/50">
+      {/* Intro Section - Cheryl's Wording */}
+      <section className="py-20 lg:py-28 px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
           >
-            <p className="font-heading text-2xl md:text-3xl lg:text-4xl text-foreground leading-relaxed mb-6">
-              Devahiti is a Sanskrit word meaning <span className="text-primary">Divine</span> or <span className="text-primary">Natural Order</span>.
+            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              Welcome to Devahiti, a beautiful open-air yoga and movement studio located in Ballito, South Africa.
             </p>
-            <p className="text-base text-muted-foreground leading-relaxed mt-6">
-              Our educational Yoga Studio specialises in Somatic psychology to align Mind, Body and Spirit, 
-              holistically, with Asana, Pranayama, Mantra, Sound and Meditation.
+
+            <p className="text-base text-muted-foreground leading-relaxed mb-6">
+              Hi, I am <span className="font-medium text-foreground">Cheryl Lancellas</span>. I specialise in private and 
+              corporate group yoga and movement classes, sound journey experiences, and educational workshops, 
+              in our small home studio or in the comfort of your holiday accommodation. All equipment is provided.
+            </p>
+
+            <p className="text-base text-muted-foreground leading-relaxed">
+              Unwind with family and friends as you reduce stress through mindful movement, followed
+              by a nurturing sound journey, leaving you feeling relaxed and restored.
+            </p>
+
+            <p className="text-sm text-ocean mt-6 uppercase tracking-widest font-medium">
+              Beginners are always welcome ✨
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className="py-20 lg:py-32 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <img
-                src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/b9d7d7c6d_generated_c5fd17b8.png"
-                alt="Yoga practice"
-                className="w-full max-w-lg mx-auto"
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="space-y-6"
-            >
-              <p className="text-xs tracking-[0.3em] uppercase text-primary">
-                Our Philosophy
-              </p>
-              <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-foreground">
-                Rooted in Science & Tradition
-              </h2>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                Rooted in science and evidence-based movement practices, in conjunction with time-honoured 
-                yogic principles, Devahiti Yoga is an all-encompassing Yogic system, designed to facilitate 
-                alignment and harmony.
-              </p>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                Using traditional methods of Yoga, eclectic movement practices, sound, and methods of deep 
-                relaxation to increase mindfulness and improve cognitive processes.
-              </p>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                The significant benefits of Yoga for children, athletes, men, women and seniors are well proven, 
-                as Yoga addresses both physical and mental aspects of health, and well-being. It is after all 
-                only when we start connecting with these two that we begin to see the first Spark of Spirit.
-              </p>
-            </motion.div>
-          </div>
+      {/* Devahiti Meaning */}
+      <section className="py-20 lg:py-28 px-6 bg-gradient-to-b from-white to-ocean/5">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex justify-center mb-6">
+              <div className="w-12 h-px bg-ocean/30" />
+              <span className="mx-3 text-ocean/50 text-xs">✦</span>
+              <div className="w-12 h-px bg-ocean/30" />
+            </div>
+            <p className="font-heading text-2xl md:text-3xl lg:text-4xl text-foreground leading-relaxed mb-6">
+              Devahiti is a Sanskrit word meaning <span className="text-ocean">Divine</span> or{" "}
+              <span className="text-ocean">Natural Order</span>.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Quote Section */}
-      <section className="py-20 lg:py-28 px-6 bg-muted/50">
+      {/* Philosophy (Cleaned as requested) */}
+      <section className="py-20 lg:py-32 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <img
+              src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/b9d7d7c6d_generated_c5fd17b8.png"
+              alt="Yoga practice"
+              className="w-full rounded-lg"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <p className="text-xs tracking-[0.3em] uppercase text-ocean">
+              Our Philosophy
+            </p>
+
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-foreground">
+              Rooted in <span className="text-ocean">Science</span> & <span className="text-ocean">Tradition</span>
+            </h2>
+
+            <p className="text-base text-muted-foreground leading-relaxed">
+              Rooted in science and evidence-based movement practices, in conjunction with
+              time-honoured yogic principles, Devahiti Yoga is designed to facilitate alignment
+              and harmony between mind, body and spirit.
+            </p>
+
+            <div className="bg-ocean/5 p-4 rounded-lg border-l-4 border-ocean">
+              <p className="italic text-ocean font-heading text-lg">
+                "If you can breathe, you can do yoga."
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Founder Section - Cheryl */}
+      <section className="py-20 lg:py-28 px-6 bg-ocean/5">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Droplets className="h-10 w-10 text-ocean/40 mx-auto mb-4" />
+            <h2 className="font-heading text-3xl md:text-4xl font-light text-foreground mb-4">
+              Meet Cheryl
+            </h2>
+
+            <p className="text-base text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+              I would like to inspire as many people as possible to keep moving and
+              dancing with life, maintaining both mental and physical well-being,
+              while slowing down the ageing process.
+            </p>
+
+            <p className="text-base text-muted-foreground leading-relaxed max-w-2xl mx-auto mt-4">
+              Myself and my teachers would love to share our passion for this
+              ancient art and science with you.
+            </p>
+
+            <div className="flex flex-col items-center gap-2 mt-8 pt-4">
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Mail className="h-4 w-4 text-ocean" />
+                <a href="mailto:cheryl@devahiti.com" className="hover:text-ocean transition">
+                  cheryl@devahiti.com
+                </a>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Phone className="h-4 w-4 text-ocean" />
+                <a href="tel:+27840902083" className="hover:text-ocean transition">
+                  +27 84 090 2083
+                </a>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <MapPin className="h-4 w-4 text-ocean" />
+                <span>Ballito, South Africa</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Teacher Training Teaser */}
+      <section className="py-20 lg:py-28 px-6 bg-white">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
           >
-            <p className="font-heading text-2xl md:text-3xl lg:text-4xl italic text-foreground leading-relaxed">
-              "I strive to encourage those who think 'they can't do yoga', to become those who can...
+            <h2 className="font-heading text-3xl md:text-4xl font-light text-foreground mb-4">
+              Upcoming Teacher Training
+            </h2>
+            <p className="text-base text-muted-foreground leading-relaxed mb-6">
+              200-hour training starts <span className="font-medium text-ocean">May 16-17, 2026</span> (until December 2026)
             </p>
-            <p className="font-heading text-xl md:text-2xl text-primary italic mt-6">
-              because if you can breathe, you can do yoga!"
+            <p className="text-base text-muted-foreground leading-relaxed mb-8">
+              300-hour advanced training starts <span className="font-medium text-ocean">May 2-3, 2026</span> (12-month program)
             </p>
-            <p className="text-sm text-muted-foreground mt-8">
-              We welcome all practitioners from beginners through advanced and special needs.
-            </p>
+            <Link
+              to="/events"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-ocean/30 text-ocean text-xs uppercase tracking-widest hover:bg-ocean hover:text-white transition-all rounded-sm"
+            >
+              View Full Schedule <ArrowRight className="h-4 w-4" />
+            </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* Founder Section */}
-      <section className="py-20 lg:py-32 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="space-y-6 lg:order-1"
-            >
-              <p className="text-xs tracking-[0.3em] uppercase text-primary">Our Founder</p>
-              <h2 className="font-heading text-3xl md:text-4xl font-light text-foreground">
-                Over Four Decades of Passion
-              </h2>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                For over four decades movement, dance and yoga have been my profession.
-              </p>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                I would like to inspire as many people as possible to keep moving, dancing with life to 
-                maintain their mental and physical well-being, thereby slowing down the ageing process.
-              </p>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                Myself and my teachers would love to share our passion for this ancient art and science 
-                with you. We invite you to take a free trial class with us whenever you are ready to dip 
-                your toes into this beautiful practice that is yoga.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="lg:order-2"
-            >
-              <img
-                src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/85db9c9b2_generated_53ef1b3a.png"
-                alt="Yoga founder teaching"
-                className="w-full"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Teacher Training CTA */}
-      <section className="py-20 lg:py-28 px-6 bg-primary">
+      {/* Free Trial CTA */}
+      <section className="py-20 lg:py-28 px-6 bg-ocean">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-primary-foreground mb-6">
-            200 hour and 300 hour Advanced Teacher Training
-          </h2>
-          <p className="text-xl text-primary-foreground/80 mb-4">
-            Starts in May 2026
-          </p>
-          <p className="text-base text-primary-foreground/70 mb-10">
-            Join our comprehensive teacher training program and deepen your practice.
-          </p>
-          <Link
-            to="/booking"
-            className="inline-flex items-center gap-3 px-10 py-4 bg-background text-foreground text-xs font-medium tracking-[0.3em] uppercase hover:bg-background/90 transition-all duration-300"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
           >
-            Enquire Now <ArrowRight className="h-4 w-4" />
-          </Link>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-white mb-4">
+              Begin Your Journey
+            </h2>
+            <p className="text-base text-white/80 mb-8 max-w-2xl mx-auto">
+              Try a free trial class and experience the Devahiti difference for yourself.
+            </p>
+            <Link
+              to="/booking?type=free"
+              className="inline-flex items-center gap-3 px-10 py-4 bg-white text-ocean text-xs font-medium tracking-[0.3em] uppercase hover:bg-white/90 transition-all duration-300 rounded-sm"
+            >
+              Claim Your Free Class <ArrowRight className="h-4 w-4" />
+            </Link>
+          </motion.div>
         </div>
       </section>
     </div>

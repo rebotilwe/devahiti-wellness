@@ -1,13 +1,21 @@
 import { Link } from "react-router-dom";
+// Import your logo - adjust the filename to match your actual file
+import logo from "../assets/logo1.png"; // or .svg, .webp, etc.
 
 export default function Footer() {
   return (
     <footer className="bg-[#4a3728] text-white/80">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
-          {/* Brand */}
+          {/* Brand with Logo - Increased size */}
           <div>
-            <h3 className="font-heading text-3xl text-white mb-2">Devahiti</h3>
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src={logo} 
+                alt="Devahiti Yoga Logo" 
+                className="h-16 md:h-20 lg:h-24 w-auto object-contain"
+              />
+            </div>
             <p className="text-xs tracking-widest uppercase text-white/50 mb-6">
               'Day-vah-hee-tee' — Sanskrit for Divine Order
             </p>

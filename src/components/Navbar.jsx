@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+// Import your logo - adjust the filename to match your actual file
+import logo from "../assets/logo1.png"; // or .svg, .webp, etc.
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -36,11 +38,13 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <span className="font-heading text-2xl md:text-3xl font-medium tracking-wide text-foreground">
-              Devahiti
-            </span>
+          {/* Logo - Increased size */}
+          <Link to="/" className="flex items-center">
+            <img 
+              src={logo} 
+              alt="Devahiti Yoga Logo" 
+              className="h-12 md:h-14 lg:h-16 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -62,7 +66,7 @@ export default function Navbar() {
 
           {/* CTA + Phone */}
           <div className="hidden lg:flex items-center gap-5">
-            <a href="tel:+61000000000" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="tel:+27840902083" className="text-muted-foreground hover:text-primary transition-colors">
               <Phone className="h-4 w-4" />
             </a>
             <Link
