@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 // Import your logo - adjust the filename to match your actual file
 import logo from "../assets/logo1.png"; // or .svg, .webp, etc.
 
+// Calendly URL
+const CALENDLY_URL = "https://calendly.com/cheryl-sayogasafaris";
+
 const navLinks = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about" },
@@ -27,6 +30,11 @@ export default function Navbar() {
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
+
+  // Handle booking click - opens Calendly in new tab
+  const handleBookingClick = () => {
+    window.open(CALENDLY_URL, "_blank");
+  };
 
   return (
     <header
@@ -69,12 +77,12 @@ export default function Navbar() {
             <a href="tel:+27840902083" className="text-muted-foreground hover:text-primary transition-colors">
               <Phone className="h-4 w-4" />
             </a>
-            <Link
-              to="/booking"
-              className="px-6 py-2.5 bg-primary text-primary-foreground text-xs font-body font-medium tracking-widest uppercase rounded-none hover:bg-primary/90 transition-all duration-300"
+            <button
+              onClick={handleBookingClick}
+              className="px-6 py-2.5 bg-primary text-primary-foreground text-xs font-body font-medium tracking-widest uppercase rounded-none hover:bg-primary/90 transition-all duration-300 cursor-pointer"
             >
               Book Online
-            </Link>
+            </button>
           </div>
 
           {/* Mobile Toggle */}
@@ -110,12 +118,12 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                to="/booking"
-                className="mt-2 px-6 py-3 bg-primary text-primary-foreground text-xs font-body font-medium tracking-widest uppercase text-center"
+              <button
+                onClick={handleBookingClick}
+                className="mt-2 px-6 py-3 bg-primary text-primary-foreground text-xs font-body font-medium tracking-widest uppercase text-center cursor-pointer"
               >
                 Book Online
-              </Link>
+              </button>
             </nav>
           </motion.div>
         )}
