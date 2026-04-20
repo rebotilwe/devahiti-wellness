@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ExternalLink } from "lucide-react";
 // Import your logo - adjust the filename to match your actual file
 import logo from "../assets/logo1.png"; // or .svg, .webp, etc.
 
@@ -96,8 +97,16 @@ export default function Footer() {
           <p className="text-xs text-white/40">
             © {new Date().getFullYear()} Devahiti Yoga WA. All rights reserved.
           </p>
-          <p className="text-xs text-white/40">
-            Sessions suitable for everyBODY. Beginners welcome.
+          <p className="text-xs text-white/40 flex items-center gap-1">
+            Developed by{" "}
+            <a 
+              href="https://afribizconnect.co.za" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-[#c47a5a] transition-colors inline-flex items-center gap-1"
+            >
+              Afribiz Connect <ExternalLink className="w-3 h-3" />
+            </a>
           </p>
         </div>
       </div>
