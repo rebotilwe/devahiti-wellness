@@ -1,108 +1,124 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, Clock, Users, ArrowRight, Phone, Mail, Heart, Award, Music, Waves, Droplets } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  Users,
+  Heart,
+  Award,
+  Music,
+  Waves,
+  Droplets
+} from "lucide-react";
+
 import CalendlyEmbed from "../components/CalendlyEmbed";
 
-// Calendly URL - VERIFIED working URL
+// Calendly base URL
 const CALENDLY_URL = "https://calendly.com/cheryl-sayogasafaris";
 
 const packages = [
-  { 
-    title: "Free Trial Class", 
-    duration: "60 minutes", 
-    price: "FREE", 
+  {
+    title: "Free Trial Class",
+    duration: "60 minutes",
+    price: "FREE",
     people: "All Levels",
-    description: "New to yoga? Try your first class for free and experience the Devahiti difference.",
+    description:
+      "New to yoga? Try your first class for free and experience the Devahiti difference.",
     icon: Heart,
     bookingType: "free"
   },
-  { 
-    title: "Group Yoga Classes", 
-    duration: "45 – 90 minutes", 
-    price: "R130 drop-in", 
+  {
+    title: "Group Yoga Classes",
+    duration: "45 – 90 minutes",
+    price: "R130 drop-in",
     people: "All Levels",
-    description: "Weekly classes focused on mindful movement, breathwork and relaxation. Beginners welcome!",
+    description:
+      "Weekly classes focused on mindful movement, breathwork and relaxation. Beginners welcome!",
     icon: Users,
     bookingType: "group"
   },
-  { 
-    title: "Sound Journey", 
-    duration: "60 minutes", 
-    price: "R800 individual (+R150 per extra person)", 
+  {
+    title: "Sound Journey",
+    duration: "60 minutes",
+    price: "From R800",
     people: "All Levels",
-    description: "A deeply restorative sound experience using healing frequencies and vibration to reduce stress.",
+    description:
+      "A deeply restorative sound experience using healing frequencies and vibration to reduce stress.",
     icon: Music,
     bookingType: "sound"
   },
-  { 
-    title: "Private Yoga Sessions", 
-    duration: "60 minutes", 
-    price: "R650 (+R150 per extra person)", 
+  {
+    title: "Private Yoga Sessions",
+    duration: "60 minutes",
+    price: "R650 (+R150 per extra person)",
     people: "1-on-1 / Small Groups",
-    description: "Personalised sessions tailored to your body and goals, in the comfort of your own space.",
+    description:
+      "Personalised sessions tailored to your body and goals, in the comfort of your own space.",
     icon: Heart,
     bookingType: "private"
   },
-  { 
-    title: "Private Group Yoga & Sound Journey", 
-    duration: "75 minutes", 
-    price: "R1999 (up to 8 people)", 
+  {
+    title: "Private Group Yoga & Sound Journey",
+    duration: "75 minutes",
+    price: "R1999 (up to 8 people)",
     people: "Groups / Retreats",
-    description: "Perfect for retreats, holidays or special gatherings. Includes both yoga and sound healing.",
+    description:
+      "Perfect for retreats, holidays or special gatherings. Includes both yoga and sound healing.",
     icon: Users,
     bookingType: "group-sound"
   },
-  { 
-    title: "Corporate Yoga & Wellness", 
-    duration: "Custom", 
-    price: "Custom pricing", 
+  {
+    title: "Corporate Yoga & Wellness",
+    duration: "Custom",
+    price: "Custom pricing",
     people: "Teams",
-    description: "Wellness sessions designed to reduce stress, improve focus and boost team morale.",
+    description:
+      "Wellness sessions designed to reduce stress, improve focus and boost team morale.",
     icon: Users,
     bookingType: "corporate"
   },
-  { 
-    title: "Fascial Release Therapy", 
-    duration: "45 – 75 minutes", 
-    price: "R450 – R650", 
+  {
+    title: "Fascial Release Therapy",
+    duration: "45 – 75 minutes",
+    price: "R450 – R650",
     people: "Individual",
-    description: "Devahiti's signature hands-on fascial release session to relieve tension and restore balance.",
+    description:
+      "Devahiti's signature hands-on fascial release session to relieve tension and restore balance.",
     icon: Heart,
     bookingType: "private"
   },
-  { 
-    title: "Teacher Training", 
-    duration: "Multi-month program", 
-    price: "Enquire", 
+  {
+    title: "Teacher Training",
+    duration: "Multi-month program",
+    price: "Enquire",
     people: "Enrolling Now",
-    description: "200hr starts May 16-17, 2026 | 300hr starts May 2-3, 2026",
+    description:
+      "200hr starts May 16-17, 2026 | 300hr starts May 2-3, 2026",
     icon: Award,
     bookingType: "enquire"
-  },
+  }
 ];
 
 export default function Booking() {
-  // Helper function to get button text
-  const getButtonText = (bookingType, title) => {
-    if (bookingType === "enquire") return "Enquire";
-    if (title === "Free Trial Class") return "Claim Free Class";
+  const getButtonText = (pkg) => {
+    if (pkg.bookingType === "enquire") return "Enquire";
+    if (pkg.bookingType === "free") return "Claim Free Class";
     return "Book Now";
   };
 
-  // Handle booking click - opens Calendly in new tab
-  const handleBookingClick = (bookingType) => {
-    if (bookingType === "enquire") {
-      // Navigate to contact page for enquiries
+  const handleBookingClick = (pkg) => {
+    if (pkg.bookingType === "enquire") {
       window.location.href = "/contact";
-    } else {
-      // Open Calendly in new tab
-      window.open(CALENDLY_URL, "_blank");
+      return;
     }
+
+    // All bookings go to Calendly
+    window.open(CALENDLY_URL, "_blank");
   };
 
   return (
     <div>
-      {/* Hero with Ocean Wave Overlay */}
+      {/* HERO with Ocean Wave Overlay */}
       <section className="relative h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -118,7 +134,6 @@ export default function Booking() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
             className="flex items-center justify-center gap-2 mb-4"
           >
             <Waves className="h-4 w-4 text-white/60" />
@@ -128,171 +143,100 @@ export default function Booking() {
             <Waves className="h-4 w-4 text-white/60" />
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="font-heading text-4xl md:text-6xl lg:text-7xl font-light text-white"
-          >
+          <h1 className="font-heading text-4xl md:text-6xl font-light text-white">
             Book a Class
-          </motion.h1>
+          </h1>
         </div>
       </section>
 
-      {/* Booking Content */}
-      <section className="py-20 lg:py-32 px-6">
-        <div className="max-w-5xl mx-auto">
-
-          {/* Intro */}
-          <div className="text-center mb-16">
-            <div className="flex justify-center mb-4">
-              <div className="w-12 h-px bg-ocean/30" />
-              <Droplets className="h-4 w-4 text-ocean/40 mx-2" />
-              <div className="w-12 h-px bg-ocean/30" />
-            </div>
-            <h2 className="font-heading text-3xl md:text-4xl font-light text-foreground mb-4">
-              Choose Your Experience
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Sessions are suitable for everybody — beginners most welcome. 
-              All equipment provided for in-studio sessions.
-            </p>
-          </div>
-
-          {/* Packages */}
-          <div className="space-y-4 mb-20">
-            {packages.map((pkg, i) => (
-              <motion.div
-                key={pkg.title}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="bg-card border border-border hover:border-ocean/30 p-6 rounded-sm transition-all duration-300 flex flex-col lg:flex-row justify-between gap-4"
-              >
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <pkg.icon className="h-5 w-5 text-ocean" />
-                    <h3 className="text-xl font-heading text-foreground">{pkg.title}</h3>
-                  </div>
-
-                  <p className="text-sm text-muted-foreground mb-3 max-w-md">
-                    {pkg.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" /> {pkg.duration}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Users className="h-3 w-3" /> {pkg.people}
-                    </span>
-                  </div>
+      {/* PACKAGES */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto space-y-4">
+          {packages.map((pkg, i) => (
+            <motion.div
+              key={pkg.title}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              className="bg-card border p-6 flex flex-col md:flex-row justify-between gap-4"
+            >
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-1">
+                  <pkg.icon className="h-5 w-5 text-ocean" />
+                  <h3 className="text-xl font-heading">{pkg.title}</h3>
                 </div>
 
-                <div className="flex items-center gap-6">
-                  <span className="text-lg font-heading font-medium text-ocean min-w-[120px] text-right">
-                    {pkg.price}
+                <p className="text-sm text-muted-foreground mb-2">
+                  {pkg.description}
+                </p>
+
+                <div className="flex gap-4 text-xs text-muted-foreground">
+                  <span className="flex items-center gap-1">
+                    <Clock className="h-3 w-3" /> {pkg.duration}
                   </span>
-
-                  {pkg.bookingType === "enquire" ? (
-                    <Link
-                      to="/contact"
-                      className="px-6 py-3 bg-ocean text-white text-xs font-medium uppercase tracking-widest hover:bg-ocean-dark transition-all rounded-sm whitespace-nowrap"
-                    >
-                      Enquire
-                    </Link>
-                  ) : (
-                    <button
-                      onClick={() => handleBookingClick(pkg.bookingType)}
-                      className="px-6 py-3 bg-ocean text-white text-xs font-medium uppercase tracking-widest hover:bg-ocean-dark transition-all rounded-sm whitespace-nowrap cursor-pointer"
-                    >
-                      {getButtonText(pkg.bookingType, pkg.title)}
-                    </button>
-                  )}
+                  <span className="flex items-center gap-1">
+                    <Users className="h-3 w-3" /> {pkg.people}
+                  </span>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
 
-          {/* Payment Explanation Box - Updated for Yoco */}
-          <div className="bg-ocean/5 border border-ocean/20 p-6 rounded-lg mb-12 text-center">
-            <p className="text-sm text-muted-foreground">
-              <span className="font-medium text-ocean">💳 How payments work:</span> After you select your time in Calendly, 
-              you will receive a confirmation email. Payment for <span className="font-medium">in-studio classes (R130)</span> is made via 
-              <span className="font-medium text-ocean"> Yoco</span> at the studio or through a secure payment link. 
-              Free trial classes and private sessions have separate payment arrangements.
-            </p>
-          </div>
+              <div className="flex items-center gap-6">
+                <span className="text-ocean font-medium min-w-[120px] text-right">
+                  {pkg.price}
+                </span>
 
-          {/* Calendly Section */}
-          <div id="calendly-section" className="bg-muted/30 border border-border p-8 lg:p-12 text-center rounded-sm">
-            <Calendar className="h-12 w-12 text-ocean/40 mx-auto mb-6" />
+                <button
+                  onClick={() => handleBookingClick(pkg)}
+                  className="px-6 py-3 bg-ocean text-white text-xs uppercase tracking-widest hover:bg-ocean-dark transition rounded-sm"
+                >
+                  {getButtonText(pkg)}
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-            <h3 className="font-heading text-2xl md:text-3xl font-light text-foreground mb-4">
+        {/* PAYMENT INFO */}
+        <div className="mt-12 text-center bg-ocean/5 border border-ocean/20 p-6 rounded-lg">
+          <p className="text-sm text-muted-foreground">
+            💳 <span className="text-ocean font-medium">Payment process:</span>{" "}
+            After booking via Calendly, you will receive a confirmation email
+            with a secure Yoco payment link to complete your payment and secure
+            your spot.
+          </p>
+        </div>
+
+        {/* CALENDLY SECTION */}
+        <div className="mt-16">
+          <div className="text-center mb-6">
+            <Calendar className="h-8 w-8 text-ocean/40 mx-auto mb-2" />
+            <h3 className="font-heading text-xl md:text-2xl font-light text-foreground">
               Select Your Date & Time
             </h3>
-
-            <p className="text-sm text-muted-foreground mb-8 max-w-md mx-auto">
-              Choose your preferred class time below. You will receive a confirmation email 
-              with payment instructions.
-            </p>
-
-            <CalendlyEmbed url={CALENDLY_URL} />
-
-            <p className="text-xs text-muted-foreground mt-6">
-              📧 A confirmation email will be sent to you immediately after booking.
-              {" "}Payment for paid classes is handled via Yoco.
+            <p className="text-sm text-muted-foreground mt-1">
+              Choose your preferred class time below
             </p>
           </div>
+          <CalendlyEmbed url={CALENDLY_URL} />
+        </div>
 
-          {/* Direct Contact Options */}
-          <div className="mt-16 text-center">
-            <h4 className="font-heading text-xl text-foreground mb-6">Or Contact Us Directly</h4>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="mailto:cheryl@devahiti.com"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-ocean/30 text-ocean text-xs font-medium uppercase tracking-widest hover:bg-ocean hover:text-white transition-all rounded-sm"
-              >
-                <Mail className="h-4 w-4" />
-                cheryl@devahiti.com
-              </a>
-
-              <a
-                href="tel:+27840902083"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-ocean/30 text-ocean text-xs font-medium uppercase tracking-widest hover:bg-ocean hover:text-white transition-all rounded-sm"
-              >
-                <Phone className="h-4 w-4" />
-                +27 84 090 2083
-              </a>
-            </div>
-
-            <p className="text-xs text-muted-foreground mt-4">
-              Based in Ballito, South Africa. Travel fee may apply outside the greater Ballito area.
-            </p>
-          </div>
+        {/* CONTACT */}
+        <div className="mt-12 text-center">
+          <Link to="/contact" className="text-ocean hover:underline text-sm">
+            Need help? Contact us
+          </Link>
         </div>
       </section>
 
-      {/* Quote Section - Ocean themed */}
-      <section className="relative py-20 lg:py-28 px-6 overflow-hidden">
+      {/* QUOTE SECTION */}
+      <section className="relative py-12 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-ocean-dark/90" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Waves className="h-8 w-8 text-white/40 mx-auto mb-4" />
-            <p className="font-heading text-2xl md:text-3xl lg:text-4xl italic text-white leading-relaxed">
-              "If you can breathe, you can do yoga"
-            </p>
-            <p className="text-sm text-white/60 mt-6">
-              Beginners are always welcome at Devahiti
-            </p>
-          </motion.div>
+        <div className="relative text-center text-white">
+          <Waves className="h-6 w-6 mx-auto mb-3 text-white/40" />
+          <p className="font-heading text-lg italic">
+            "If you can breathe, you can do yoga"
+          </p>
         </div>
       </section>
     </div>
