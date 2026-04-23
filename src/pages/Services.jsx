@@ -1,115 +1,108 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, Users, Heart, Music, Briefcase, Sun, Award, Waves, Droplets } from "lucide-react";
+import {
+  ArrowRight,
+  Clock,
+  Users,
+  Heart,
+  Music,
+  Briefcase,
+  Award,
+  Waves,
+  MapPin,
+  Droplets
+} from "lucide-react";
+
 import SectionHeading from "../components/SectionHeading";
 
 // Calendly URL
 const CALENDLY_URL = "https://calendly.com/cheryl-sayogasafaris";
 
-const allServices = [
+// ✅ GROUPED SERVICES (MATCH CLIENT STRUCTURE)
+const sections = [
   {
-    id: "group",
-    title: "Group Yoga Classes",
-    description:
-      "Join our weekly classes designed for all levels. Experience mindful movement, pranayama and relaxation in a calm and supportive environment. Beginners are always welcome.",
-    duration: "45 – 90 minutes",
-    price: "R130 drop-in",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/c514b05a9_generated_8e04c8ff.png",
-    icon: Users,
-    bookingType: "group",
+    title: "Corporate Yoga",
+    description: "Wellness sessions designed for teams, offices, and corporate retreats.",
+    services: [
+      {
+        title: "Corporate Yoga Session",
+        description:
+          "Reduce stress, improve focus and bring balance into the workplace through guided yoga and movement.",
+        duration: "60 minutes",
+        price: "Custom pricing (Enquire)",
+        location: "📍 On Location (Your Office / Venue)",
+        icon: Briefcase,
+        type: "enquire"
+      }
+    ]
   },
   {
-    id: "private",
-    title: "Private Yoga Sessions",
-    description:
-      "Personalised one-on-one or small group sessions tailored to your body and goals. Enjoy yoga in the comfort of your home or accommodation.",
-    duration: "60 minutes",
-    price: "R650 individual + R150 per extra person",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/b9d7d7c6d_generated_c5fd17b8.png",
-    icon: Heart,
-    bookingType: "private",
+    title: "Visitors & Mobile Sessions",
+    description: "Perfect for holidaymakers visiting Ballito or private group bookings.",
+    services: [
+      {
+        title: "Private Yoga Session",
+        description:
+          "Personalised sessions at your home or accommodation, tailored to your needs.",
+        duration: "60 minutes",
+        price: "R650 + R150 per extra person",
+        location: "📍 On Location (Home / Accommodation)",
+        icon: Heart,
+        type: "book",
+        capacity: "1–8 people"
+      },
+      {
+        title: "Group Yoga & Sound Journey",
+        description:
+          "A combination of mindful movement and sound healing, ideal for groups and retreats.",
+        duration: "60 minutes",
+        price: "R1999 (up to 8 people) + R150 per extra person",
+        location: "📍 On Location",
+        icon: Users,
+        type: "book",
+        capacity: "Groups up to 8"
+      },
+      {
+        title: "Sound Journey",
+        description:
+          "A deeply restorative sound experience using healing frequencies and vibration.",
+        duration: "60 minutes",
+        price: "From R800",
+        location: "📍 On Location / In Studio",
+        icon: Music,
+        type: "book",
+        capacity: "All Levels"
+      }
+    ]
   },
   {
-    id: "sound",
-    title: "Sound Journey",
-    description:
-      "A deeply restorative sound experience designed to reduce stress and bring the body into a state of relaxation and balance.",
-    duration: "60 minutes",
-    price: "R800 individual + R150 per extra person",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/90b6a8f9b_generated_85845fa4.png",
-    icon: Music,
-    bookingType: "sound",
-  },
-  {
-    id: "group-private",
-    title: "Private Group Yoga & Sound Journey",
-    description:
-      "Unwind with family and friends through mindful movement followed by a nurturing sound journey. Perfect for retreats, holidays or special gatherings.",
-    duration: "75 minutes",
-    price: "R1999 (up to 8 people) + R150 per extra person",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8a896dbea_generated_4254f10c.png",
-    icon: Users,
-    bookingType: "corporate",
-  },
-  {
-    id: "corporate",
-    title: "Corporate Yoga & Wellness",
-    description:
-      "Bring balance into the workplace. Sessions designed to reduce stress, improve focus and enhance team wellbeing.",
-    duration: "Custom",
-    price: "Custom pricing",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8a896dbea_generated_4254f10c.png",
-    icon: Briefcase,
-    bookingType: "corporate",
-  },
-  {
-    id: "yin",
-    title: "Yin Yoga",
-    description:
-      "A slow, meditative practice with longer-held postures to target deep connective tissues and promote deep relaxation.",
-    duration: "90 minutes",
-    price: "Included in group classes",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/85db9c9b2_generated_53ef1b3a.png",
-    icon: Sun,
-    bookingType: "yin",
-  },
-  {
-    id: "fascial",
-    title: "Fascial Release Therapy",
-    description:
-      "Devahiti's signature hands-on fascial release session to relieve tension, improve mobility and restore balance in the body.",
-    duration: "45 – 75 minutes",
-    price: "R450 – R650",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8c2f17577_generated_c9d14796.png",
-    icon: Heart,
-    bookingType: "private",
-  },
-  {
-    id: "training",
-    title: "Teacher Training",
-    description:
-      "200-hour and 300-hour advanced yoga teacher training programs. Deepen your practice and become a certified instructor.",
-    duration: "Multi-month program",
-    price: "Enquire for pricing",
-    image: "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8c2f17577_generated_c9d14796.png",
-    icon: Award,
-    bookingType: "enquire",
-  },
+    title: "Studio Classes",
+    description: "For local practitioners. Classes are currently performing well with monthly members.",
+    services: [
+      {
+        title: "Drop-in Class",
+        description:
+          "Join a studio class if you're visiting or not on a membership.",
+        duration: "60 minutes",
+        price: "R130",
+        location: "📍 In Studio (Ballito)",
+        icon: Users,
+        type: "book",
+        capacity: "All Levels"
+      }
+    ]
+  }
 ];
 
 export default function Services() {
+
   const handleBookingClick = () => {
     window.open(CALENDLY_URL, "_blank");
   };
 
-  const getButtonText = (bookingType) => {
-    if (bookingType === "enquire") return "Enquire";
-    return "Book Now";
-  };
-
   return (
     <div>
-      {/* Hero with Ocean Wave Overlay */}
+      {/* HERO with Ocean Wave Overlay */}
       <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -146,196 +139,112 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Info Bar */}
-      <section className="bg-ocean py-4">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12">
-          <div className="flex items-center gap-2 text-white/80">
-            <Users className="h-4 w-4" />
-            <span className="text-xs tracking-widest uppercase">All Levels Welcome</span>
-          </div>
-          <div className="flex items-center gap-2 text-white/80">
-            <Heart className="h-4 w-4" />
-            <span className="text-xs tracking-widest uppercase">Evidence-Based Practice</span>
-          </div>
-          <div className="flex items-center gap-2 text-white/80">
-            <Clock className="h-4 w-4" />
-            <span className="text-xs tracking-widest uppercase">Traditional & Modern Methods</span>
-          </div>
-        </div>
-      </section>
+      {/* SERVICES */}
+      <section className="py-20 lg:py-24 px-6">
+        <div className="max-w-5xl mx-auto space-y-20">
 
-      {/* Intro */}
-      <section className="py-20 lg:py-28 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <SectionHeading
-            subtitle="Find Your Path"
-            title="Choose Your Practice"
-            description="Whether you are just beginning or deepening your journey, our offerings are designed to support your mind, body and spirit."
-          />
-        </div>
-      </section>
-
-      {/* Services Grid with Alternating Layout */}
-      <section className="pb-20 lg:pb-32 px-6">
-        <div className="max-w-7xl mx-auto space-y-16">
-          {allServices.map((service, i) => (
-            <motion.div
-              key={service.id || i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.05 }}
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-0 ${
-                i % 2 === 1 ? "lg:flex-row-reverse" : ""
-              }`}
-            >
-              <div className="relative overflow-hidden aspect-[4/3]">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                />
-              </div>
-
-              <div className={`flex flex-col justify-center p-8 lg:p-12 ${
-                i % 2 === 0 ? "bg-card" : "bg-muted/50"
-              }`}>
-                <div className="flex items-center gap-3 mb-4">
-                  <service.icon className="h-7 w-7 text-ocean" />
-                  <h3 className="font-heading text-2xl md:text-3xl lg:text-4xl font-light text-foreground">
-                    {service.title}
-                  </h3>
+          {sections.map((section, idx) => (
+            <div key={idx}>
+              {/* Section Header */}
+              <div className="text-center mb-8">
+                <div className="flex justify-center mb-2">
+                  <div className="w-12 h-px bg-ocean/30" />
+                  <Droplets className="h-4 w-4 text-ocean/40 mx-2" />
+                  <div className="w-12 h-px bg-ocean/30" />
                 </div>
 
-                <p className="text-base text-muted-foreground leading-relaxed mb-6">
-                  {service.description}
+                <h2 className="font-heading text-2xl md:text-3xl text-foreground">
+                  {section.title}
+                </h2>
+
+                <p className="text-sm text-muted-foreground mt-2 max-w-2xl mx-auto">
+                  {section.description}
                 </p>
-
-                <div className="flex flex-wrap items-center gap-6 mb-8">
-                  <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                    <Clock className="h-4 w-4" />
-                    {service.duration}
-                  </span>
-                  <span className="text-lg font-heading font-medium text-ocean">
-                    {service.price}
-                  </span>
-                </div>
-
-                {service.bookingType === "enquire" ? (
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-ocean text-white text-xs font-medium tracking-[0.3em] uppercase hover:bg-ocean-dark transition-all rounded-sm w-full sm:w-auto"
-                  >
-                    Enquire
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                ) : (
-                  <button
-                    onClick={handleBookingClick}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-ocean text-white text-xs font-medium tracking-[0.3em] uppercase hover:bg-ocean-dark transition-all rounded-sm w-full sm:w-auto cursor-pointer"
-                  >
-                    {getButtonText(service.bookingType)}
-                    <ArrowRight className="h-4 w-4" />
-                  </button>
-                )}
               </div>
-            </motion.div>
+
+              {/* Services List */}
+              <div className="space-y-4">
+                {section.services.map((service, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    className="bg-card border border-border hover:border-ocean/30 p-6 rounded-sm transition-all duration-300 flex flex-col md:flex-row justify-between gap-4"
+                  >
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <service.icon className="h-5 w-5 text-ocean" />
+                        <h3 className="text-xl font-heading text-foreground">{service.title}</h3>
+                      </div>
+
+                      <p className="text-sm text-muted-foreground mb-3">
+                        {service.description}
+                      </p>
+
+                      <p className="text-xs text-muted-foreground flex items-center gap-2 mb-2">
+                        <MapPin className="h-3 w-3" />
+                        {service.location}
+                      </p>
+
+                      <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
+                        <span className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" /> {service.duration}
+                        </span>
+                        {service.capacity && (
+                          <span className="flex items-center gap-1">
+                            <Users className="h-3 w-3" /> {service.capacity}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-6">
+                      <span className="text-ocean font-medium min-w-[160px] text-right">
+                        {service.price}
+                      </span>
+
+                      {service.type === "enquire" ? (
+                        <Link
+                          to="/contact"
+                          className="px-6 py-3 bg-ocean text-white text-xs uppercase tracking-widest hover:bg-ocean-dark transition rounded-sm whitespace-nowrap"
+                        >
+                          Enquire
+                        </Link>
+                      ) : (
+                        <button
+                          onClick={handleBookingClick}
+                          className="px-6 py-3 bg-ocean text-white text-xs uppercase tracking-widest hover:bg-ocean-dark transition rounded-sm whitespace-nowrap cursor-pointer"
+                        >
+                          Book
+                        </button>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           ))}
+
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className="py-20 lg:py-28 px-6 bg-ocean/5 border-y border-ocean/10">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Droplets className="h-10 w-10 text-ocean/40 mx-auto mb-6" />
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-foreground mb-6">
-              Rooted in <span className="text-ocean">Science</span> & <span className="text-ocean">Tradition</span>
-            </h2>
-            <p className="text-base text-muted-foreground leading-relaxed mb-6">
-              Using traditional methods of Yoga, eclectic movement practices, sound, and methods of deep 
-              relaxation to increase mindfulness and improve cognitive processes.
-            </p>
-            <p className="text-base text-muted-foreground leading-relaxed">
-              The significant benefits of Yoga for children, athletes, men, women and seniors are well proven, 
-              as Yoga addresses both physical and mental aspects of health, and well-being.
-            </p>
-          </motion.div>
-        </div>
+      {/* SMALL FREE TRIAL NOTE (NOT PROMINENT) */}
+      <section className="py-12 px-6 text-center bg-ocean/5 border-y border-ocean/10">
+        <p className="text-sm text-muted-foreground">
+          ✨ Curious to try? Ask us about a free trial class when you get in touch
+        </p>
       </section>
 
-      {/* Quote Section */}
-      <section className="relative py-20 lg:py-28 px-6 overflow-hidden">
+      {/* QUOTE SECTION */}
+      <section className="relative py-16 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-ocean-dark/90" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Waves className="h-8 w-8 text-white/40 mx-auto mb-4" />
-            <p className="font-heading text-2xl md:text-3xl lg:text-4xl italic text-white leading-relaxed mb-6">
-              "I strive to encourage those who think 'they can't do yoga', to become those who can...
-            </p>
-            <p className="font-heading text-xl md:text-2xl text-white/90 italic">
-              because if you can breathe, you can do yoga!"
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Teacher Training CTA */}
-      <section className="py-20 lg:py-28 px-6 bg-white">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Award className="h-12 w-12 text-ocean mx-auto mb-6" />
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-foreground mb-4">
-              200 hour & 300 hour Advanced Teacher Training
-            </h2>
-            <p className="text-xl text-ocean mb-4">
-              Starts in May 2026
-            </p>
-            <p className="text-base text-muted-foreground leading-relaxed mb-10 max-w-2xl mx-auto">
-              For over four decades movement, dance and yoga have been our profession. 
-              We would love to share our passion for this ancient art and science with you.
-            </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-3 px-10 py-4 bg-ocean text-white text-xs font-medium tracking-[0.3em] uppercase hover:bg-ocean-dark transition-all rounded-sm"
-            >
-              Enquire About Training <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Free Trial CTA */}
-      <section className="py-20 lg:py-28 px-6 bg-ocean/5">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-heading text-3xl md:text-4xl font-light text-foreground mb-4">
-            Try a Class for Free
-          </h2>
-          <p className="text-base text-muted-foreground leading-relaxed mb-8">
-            We invite you to take a free trial class with us whenever you are ready to dip 
-            your toes into this beautiful practice that is yoga.
+        <div className="relative text-center text-white">
+          <Waves className="h-6 w-6 mx-auto mb-3 text-white/40" />
+          <p className="font-heading text-lg italic">
+            "If you can breathe, you can do yoga"
           </p>
-          <button
-            onClick={() => window.open(CALENDLY_URL, "_blank")}
-            className="inline-flex items-center gap-3 px-10 py-4 bg-ocean text-white text-xs font-medium tracking-[0.3em] uppercase hover:bg-ocean-dark transition-all duration-300 rounded-sm cursor-pointer"
-          >
-            Claim Your Free Class <ArrowRight className="h-4 w-4" />
-          </button>
         </div>
       </section>
     </div>

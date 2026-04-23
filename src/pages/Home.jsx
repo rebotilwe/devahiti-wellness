@@ -8,66 +8,60 @@ import ServiceCard from "../components/ServiceCard";
 const services = [
   {
     id: "group",
-    title: "Group Yoga Classes",
+    title: "Studio Drop-in Class",
     description:
-      "Suitable for all levels, including beginners. Move, breathe, and unwind in a calm and supportive space.",
-    duration: "45 – 90 min",
+      "Join an existing class at the studio. Suitable for all levels. Monthly memberships also available.",
+    duration: "60 min",
     price: "R130 drop-in",
+    location: "📍 In Studio",
     image:
       "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/c514b05a9_generated_8e04c8ff.png",
     bookingType: "group",
   },
   {
-    id: "sound",
-    title: "Sound Journey",
-    description:
-      "A deeply immersive sound experience to reduce stress and promote deep rest through healing frequencies and vibration.",
-    duration: "60 – 75 min",
-    price: "From R800",
-    image:
-      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/90b6a8f9b_generated_85845fa4.png",
-    bookingType: "sound",
-  },
-  {
     id: "private",
-    title: "Private Yoga Sessions",
+    title: "Private Yoga Session",
     description:
-      "Personalised one-on-one sessions at your home or accommodation. Tailored to your needs and goals.",
+      "Personalised session at your home or accommodation. Perfect for holidaymakers.",
     duration: "60 min",
-    price: "R650 (R150 per extra person)",
+    price: "R650 (+R150 per extra person)",
+    location: "📍 On Location",
     image:
       "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/0ce063086_generated_ab60dfbd.png",
     bookingType: "private",
   },
   {
-    id: "corporate",
-    title: "Corporate & Group Sessions",
+    id: "sound",
+    title: "Sound Journey",
     description:
-      "Wellness experiences for teams, retreats, or private groups. Reduce stress and reconnect through guided sessions.",
-    duration: "75 min",
+      "A restorative sound healing experience for deep relaxation at your accommodation.",
+    duration: "60 min",
+    price: "From R800",
+    location: "📍 On Location",
+    image:
+      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/90b6a8f9b_generated_85845fa4.png",
+    bookingType: "sound",
+  },
+  {
+    id: "corporate",
+    title: "Corporate Yoga",
+    description:
+      "Wellness sessions for teams and events at your location. Great for team building.",
+    duration: "60 min",
     price: "R1999 (up to 8 people)",
+    location: "📍 On Location",
     image:
       "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8a896dbea_generated_4254f10c.png",
     bookingType: "corporate",
   },
   {
-    id: "yin",
-    title: "Yin Yoga",
-    description:
-      "Slow-paced yoga focused on deep tissue release, relaxation, and mindfulness.",
-    duration: "90 min",
-    price: "Included in group classes",
-    image:
-      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/85db9c9b2_generated_53ef1b3a.png",
-    bookingType: "yin",
-  },
-  {
     id: "training",
     title: "Teacher Training",
     description:
-      "200-hour and 300-hour advanced yoga teacher training programs starting May 2026.",
-    duration: "Multi-month program",
+      "200hr & 300hr advanced yoga teacher training programs starting May 2026.",
+    duration: "Multi-month",
     price: "Enquire for pricing",
+    location: "📍 In Studio",
     image:
       "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/b9d7d7c6d_generated_c5fd17b8.png",
     bookingType: "enquire",
@@ -82,7 +76,6 @@ const breathingSteps = [
   { label: "Exhale", duration: 5000, scale: 1 },
 ];
 
-// Calendly URL
 const CALENDLY_URL = "https://calendly.com/cheryl-sayogasafaris";
 
 export default function Home() {
@@ -184,7 +177,8 @@ export default function Home() {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2 }}>
-      {/* HERO SECTION with Animated Text */}
+      
+      {/* HERO with Animated Text */}
       <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -197,7 +191,7 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          {/* Welcome Badge with Wave */}
+          {/* Welcome Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -221,11 +215,22 @@ export default function Home() {
             Yoga & <br /> <span className="italic font-serif">Movement Studio</span>
           </motion.h1>
 
-          {/* Slogan + Animated Rotating Words */}
+          {/* Location Badge */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="flex items-center justify-center gap-2 mt-4 text-white/70 text-sm"
+          >
+            <MapPin className="h-4 w-4" />
+            Ballito • In Studio & On Location
+          </motion.div>
+
+          {/* Slogan + Animated Words */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
+            transition={{ delay: 0.9 }}
             className="mt-6"
           >
             <p className="text-white/80 text-base md:text-lg font-light mb-2">
@@ -246,28 +251,6 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.9, duration: 1 }}
-            className="text-white/60 mt-6 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed"
-          >
-            Open-air yoga and movement studio in Ballito. Private sessions, group classes, 
-            sound journeys, and wellness experiences — all equipment provided.
-          </motion.p>
-
-          {/* Location */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="flex items-center justify-center gap-2 mt-4 text-white/60 text-sm"
-          >
-            <MapPin className="h-4 w-4" />
-            Ballito, South Africa
-          </motion.div>
-
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -275,14 +258,12 @@ export default function Home() {
             transition={{ delay: 1.1 }}
             className="flex flex-col sm:flex-row gap-5 justify-center mt-12"
           >
-            <a
-              href={CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/booking"
               className="px-12 py-4 bg-ocean text-white text-[11px] font-medium uppercase tracking-[0.3em] hover:bg-ocean-dark transition-all rounded-sm shadow-xl shadow-ocean/10"
             >
-              Free Trial Class
-            </a>
+              Book a Session
+            </Link>
             <Link
               to="/services"
               className="px-12 py-4 border border-white/20 text-white text-[11px] font-medium uppercase tracking-[0.3em] hover:bg-white/10 transition-all rounded-sm backdrop-blur-sm"
@@ -306,23 +287,72 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Client Message Section */}
+      {/* Choose Your Experience Section */}
       <section className="py-20 lg:py-28 px-6 bg-ocean/5 border-y border-ocean/10">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
             <Droplets className="h-10 w-10 text-ocean/40 mx-auto mb-6" />
-            <p className="font-heading text-2xl md:text-3xl lg:text-4xl text-ocean italic mb-4 leading-relaxed">
-              "Unwind with family and friends as you reduce stress through mindful movement, 
-              followed by a nurturing sound journey — leaving you feeling relaxed and restored."
+            <h2 className="font-heading text-3xl md:text-4xl font-light text-foreground mb-4">
+              Choose Your Experience
+            </h2>
+            <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">
+              Whether you're a local, a corporate team, or visiting Ballito — we have the perfect wellness experience for you.
             </p>
-            <p className="text-sm text-muted-foreground mt-4">
-              Sessions suitable for everybody. Beginners are always welcome ✨
-            </p>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Corporate Yoga Card */}
+              <div className="bg-white border border-ocean/20 p-8 rounded-sm hover:shadow-lg transition-shadow">
+                <h3 className="font-heading text-2xl text-foreground mb-2">Corporate Yoga</h3>
+                <p className="text-muted-foreground mb-3">Sessions at your location for teams & events</p>
+                <p className="text-xs text-ocean mb-4">📍 On Location • 60 min</p>
+                <p className="text-sm font-medium text-foreground mb-4">R1999 (up to 8 people)</p>
+                <Link to="/booking" className="inline-block bg-ocean text-white px-6 py-2 text-sm uppercase tracking-wider hover:bg-ocean-dark transition">
+                  View Packages
+                </Link>
+              </div>
+
+              {/* Visiting Ballito Card */}
+              <div className="bg-white border border-ocean/20 p-8 rounded-sm hover:shadow-lg transition-shadow">
+                <h3 className="font-heading text-2xl text-foreground mb-2">Visiting Ballito</h3>
+                <p className="text-muted-foreground mb-3">Private yoga & sound sessions for holiday guests</p>
+                <p className="text-xs text-ocean mb-4">📍 At your accommodation • 60 min</p>
+                <p className="text-sm font-medium text-foreground mb-4">From R650</p>
+                <Link to="/booking" className="inline-block bg-ocean text-white px-6 py-2 text-sm uppercase tracking-wider hover:bg-ocean-dark transition">
+                  View Packages
+                </Link>
+              </div>
+            </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Services Preview */}
+      <section className="py-24 px-6 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeading
+            subtitle="What We Offer"
+            title="Our Classes & Experiences"
+            description="Whether you are just beginning or deepening your journey, our offerings are designed to support your mind, body and spirit."
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mt-20">
+            {services.map((service, i) => (
+              <ServiceCard key={i} {...service} index={i} />
+            ))}
+          </div>
+
+          <div className="text-center mt-16">
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-3 px-10 py-4 border border-ocean/30 text-ocean text-xs font-medium tracking-[0.3em] uppercase hover:bg-ocean hover:text-white transition-all duration-500 rounded-sm"
+            >
+              View All Classes <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -397,32 +427,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Preview */}
-      <section className="py-24 px-6 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeading
-            subtitle="What We Offer"
-            title="Our Classes & Experiences"
-            description="Whether you are just beginning or deepening your journey, our offerings are designed to support your mind, body and spirit."
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mt-20">
-            {services.map((service, i) => (
-              <ServiceCard key={i} {...service} index={i} />
-            ))}
-          </div>
-
-          <div className="text-center mt-16">
-            <Link
-              to="/services"
-              className="inline-flex items-center gap-3 px-10 py-4 border border-ocean/30 text-ocean text-xs font-medium tracking-[0.3em] uppercase hover:bg-ocean hover:text-white transition-all duration-500 rounded-sm"
-            >
-              View All Classes <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Quote Banner */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
@@ -485,27 +489,6 @@ export default function Home() {
               Enquire About Training
             </Link>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Free Trial CTA */}
-      <section className="py-20 lg:py-28 px-6 bg-background">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-heading text-3xl md:text-4xl font-light text-foreground mb-4">
-            Try a Class for Free
-          </h2>
-          <p className="text-base text-muted-foreground leading-relaxed mb-8">
-            We invite you to take a free trial class with us whenever you are ready to dip 
-            your toes into this beautiful practice that is yoga.
-          </p>
-          <a
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-10 py-4 bg-ocean text-white text-xs font-medium tracking-[0.3em] uppercase hover:bg-ocean-dark transition-all duration-300 rounded-sm"
-          >
-            Claim Your Free Class <ArrowRight className="h-4 w-4" />
-          </a>
         </div>
       </section>
     </motion.div>
