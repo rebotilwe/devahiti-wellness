@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ArrowRight, Waves, Droplets, MapPin, Star } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import ServiceCard from "../components/ServiceCard";
+import FreeTrialPopup from "../components/FreeTrialPopup";
 
 const services = [
   {
@@ -70,51 +71,11 @@ const services = [
 
 const animatedWords = ["Breathe", "Center", "Align", "Flow", "Release", "Restore"];
 
-const breathingSteps = [
-  { label: "Inhale", duration: 4000, scale: 1.6 },
-  { label: "Hold", duration: 3000, scale: 1.6 },
-  { label: "Exhale", duration: 5000, scale: 1 },
-];
-
-const CALENDLY_URL = "https://calendly.com/cheryl-sayogasafaris";
-
 export default function Home() {
-  const [showHero, setShowHero] = useState(false);
-  const [stepIndex, setStepIndex] = useState(0);
-  const [isRunning, setIsRunning] = useState(true);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
-  const currentStep = breathingSteps[stepIndex];
-
   useEffect(() => {
-    if (!showHero) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [showHero]);
-
-  useEffect(() => {
-    if (!isRunning || showHero) return;
-
-    const timer = setTimeout(() => {
-      if (stepIndex < breathingSteps.length - 1) {
-        setStepIndex((prev) => prev + 1);
-      } else {
-        setIsRunning(false);
-        setTimeout(() => setShowHero(true), 1000);
-      }
-    }, currentStep.duration);
-
-    return () => clearTimeout(timer);
-  }, [stepIndex, isRunning, showHero, currentStep.duration]);
-
-  useEffect(() => {
-    if (!showHero) return;
     const interval = setInterval(() => {
       setIsVisible(false);
       setTimeout(() => {
@@ -123,62 +84,12 @@ export default function Home() {
       }, 300);
     }, 2500);
     return () => clearInterval(interval);
-  }, [showHero]);
-
-  if (!showHero) {
-    return (
-      <section className="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="absolute inset-0 bg-gradient-to-br from-ocean/20 via-black to-ocean/10"
-        />
-
-        <div className="relative z-10 flex flex-col items-center text-center px-6">
-          <motion.div
-            animate={{ scale: currentStep.scale }}
-            transition={{
-              duration: currentStep.duration / 1000,
-              ease: "easeInOut",
-            }}
-            className="w-48 h-48 rounded-full bg-ocean/20 border border-ocean/30 flex items-center justify-center backdrop-blur-sm"
-          >
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={currentStep.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.1 }}
-                className="text-white text-sm tracking-[0.3em] uppercase font-light"
-              >
-                {currentStep.label}
-              </motion.span>
-            </AnimatePresence>
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.6 }}
-            className="text-white mt-10 text-xs tracking-[0.4em] uppercase font-light"
-          >
-            Breathe with awareness
-          </motion.p>
-
-          <button
-            onClick={() => setShowHero(true)}
-            className="mt-12 text-[10px] text-white/40 tracking-[0.2em] uppercase underline underline-offset-8 hover:text-ocean-light transition-colors"
-          >
-            Skip Intro
-          </button>
-        </div>
-      </section>
-    );
-  }
+  }, []);
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2 }}>
       
-      {/* HERO with Animated Text */}
+      {/* HERO */}
       <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -191,7 +102,8 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          {/* Welcome Badge */}
+
+          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -205,37 +117,44 @@ export default function Home() {
             <Waves className="h-4 w-4 text-ocean-light/60" />
           </motion.div>
 
-          {/* Main Title */}
+          {/* Title */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="font-heading text-5xl md:text-7xl lg:text-8xl font-light text-white leading-[1.1]"
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="font-heading text-4xl md:text-6xl lg:text-7xl font-light text-white leading-[1.2]"
           >
-            Yoga & <br /> <span className="italic font-serif">Movement Studio</span>
+            Yoga & <br /> Movement Studio
           </motion.h1>
 
-          {/* Location Badge */}
+          {/* Clean Message - Client's original wording */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="text-white/80 text-base md:text-lg max-w-xl mx-auto mt-6 leading-relaxed"
+          >
+            Feeling overwhelmed, rushed, burned out? Through gentle postures, breathwork and mindful movement, we regulate your nervous system back into balance and harmony.
+          </motion.p>
+
+          {/* Location */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="flex items-center justify-center gap-2 mt-4 text-white/70 text-sm"
+            transition={{ delay: 0.6 }}
+            className="flex items-center justify-center gap-2 mt-5 text-white/60 text-sm"
           >
             <MapPin className="h-4 w-4" />
             Ballito • In Studio & On Location
           </motion.div>
 
-          {/* Slogan + Animated Words */}
+          {/* Animated words */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
-            className="mt-6"
+            transition={{ delay: 0.7 }}
+            className="mt-5"
           >
-            <p className="text-white/80 text-base md:text-lg font-light mb-2">
-              "If you can breathe, you can do yoga"
-            </p>
             <div className="flex items-center justify-center gap-2 flex-wrap">
               <span className="text-white/60 text-sm tracking-wide">Find your flow —</span>
               <div className="relative inline-block min-w-[130px] text-center">
@@ -255,8 +174,8 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
-            className="flex flex-col sm:flex-row gap-5 justify-center mt-12"
+            transition={{ delay: 0.8 }}
+            className="flex flex-col sm:flex-row gap-5 justify-center mt-10"
           >
             <Link
               to="/booking"
@@ -271,13 +190,15 @@ export default function Home() {
               View Services
             </Link>
           </motion.div>
+
+          {/* ❌ FREE TRIAL TEXT REMOVED - Now handled by popup only */}
         </div>
 
         {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
+          transition={{ delay: 1.0 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <div className="flex flex-col items-center gap-2">
@@ -310,7 +231,7 @@ export default function Home() {
                 <p className="text-muted-foreground mb-3">Sessions at your location for teams & events</p>
                 <p className="text-xs text-ocean mb-4">📍 On Location • 60 min</p>
                 <p className="text-sm font-medium text-foreground mb-4">R1999 (up to 8 people)</p>
-                <Link to="/booking" className="inline-block bg-ocean text-white px-6 py-2 text-sm uppercase tracking-wider hover:bg-ocean-dark transition">
+                <Link to="/booking" className="inline-block bg-ocean text-white px-6 py-2 text-sm uppercase tracking-wider hover:bg-ocean-dark transition rounded-sm">
                   View Packages
                 </Link>
               </div>
@@ -321,7 +242,7 @@ export default function Home() {
                 <p className="text-muted-foreground mb-3">Private yoga & sound sessions for holiday guests</p>
                 <p className="text-xs text-ocean mb-4">📍 At your accommodation • 60 min</p>
                 <p className="text-sm font-medium text-foreground mb-4">From R650</p>
-                <Link to="/booking" className="inline-block bg-ocean text-white px-6 py-2 text-sm uppercase tracking-wider hover:bg-ocean-dark transition">
+                <Link to="/booking" className="inline-block bg-ocean text-white px-6 py-2 text-sm uppercase tracking-wider hover:bg-ocean-dark transition rounded-sm">
                   View Packages
                 </Link>
               </div>
@@ -491,6 +412,9 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Free Trial Popup */}
+      <FreeTrialPopup />
     </motion.div>
   );
 }

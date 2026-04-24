@@ -38,7 +38,7 @@ const sections = [
   },
   {
     title: "Visitors & Mobile Sessions",
-    description: "Perfect for holidaymakers visiting Ballito or private group bookings.",
+    description: "Perfect for holidaymakers from Johannesburg visiting Ballito.",
     services: [
       {
         title: "Private Yoga Session",
@@ -68,7 +68,7 @@ const sections = [
           "A deeply restorative sound experience using healing frequencies and vibration.",
         duration: "60 minutes",
         price: "From R800",
-        location: "📍 On Location / In Studio",
+        location: "📍 On Location or In Studio (confirmed after booking)",
         icon: Music,
         type: "book",
         capacity: "All Levels"
@@ -198,6 +198,13 @@ export default function Services() {
                           </span>
                         )}
                       </div>
+
+                      {/* Duration reminder - shows for all services that aren't enquire */}
+                      {service.type !== "enquire" && (
+                        <p className="text-xs text-ocean/70 mt-2">
+                          ⏱️ All private sessions are 60 minutes
+                        </p>
+                      )}
                     </div>
 
                     <div className="flex items-center gap-6">
@@ -217,7 +224,7 @@ export default function Services() {
                           onClick={handleBookingClick}
                           className="px-6 py-3 bg-ocean text-white text-xs uppercase tracking-widest hover:bg-ocean-dark transition rounded-sm whitespace-nowrap cursor-pointer"
                         >
-                          Book
+                          Book Now
                         </button>
                       )}
                     </div>
@@ -246,6 +253,16 @@ export default function Services() {
             "If you can breathe, you can do yoga"
           </p>
         </div>
+      </section>
+
+      {/* CTA to Booking */}
+      <section className="py-12 px-6 text-center bg-background">
+        <Link
+          to="/booking"
+          className="inline-flex items-center gap-2 px-8 py-3 bg-ocean text-white text-xs uppercase tracking-widest hover:bg-ocean-dark transition rounded-sm"
+        >
+          Ready to book? Choose your session <ArrowRight className="h-4 w-4" />
+        </Link>
       </section>
     </div>
   );

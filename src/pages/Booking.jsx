@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   Calendar,
   Clock,
@@ -8,15 +9,14 @@ import {
   Music,
   Waves,
   MapPin,
-  Droplets
+  Droplets,
+  ArrowRight
 } from "lucide-react";
 
 import CalendlyEmbed from "../components/CalendlyEmbed";
 
-// Calendly URL
 const CALENDLY_URL = "https://calendly.com/cheryl-sayogasafaris";
 
-// ✅ STRUCTURED SECTIONS
 const sections = [
   {
     title: "Corporate Yoga",
@@ -27,7 +27,7 @@ const sections = [
         duration: "60 minutes",
         price: "Custom pricing",
         people: "Up to 8 people (additional per person)",
-        location: "On Location (Office / Venue)",
+        location: "📍 On Location (Office / Venue)",
         icon: Users,
         type: "enquire"
       }
@@ -35,23 +35,23 @@ const sections = [
   },
   {
     title: "Visitors & Mobile Sessions",
-    description: "Perfect for holidaymakers visiting Ballito.",
+    description: "Perfect for holidaymakers from Johannesburg visiting Ballito.",
     packages: [
       {
         title: "Private Yoga Session",
         duration: "60 minutes",
         price: "R650 (+R150 per extra person)",
         people: "1–8 people",
-        location: "On Location (Home / Accommodation)",
+        location: "📍 On Location (Accommodation)",
         icon: Heart,
         type: "book"
       },
       {
         title: "Group Yoga & Sound Journey",
         duration: "60 minutes",
-        price: "R1999 (up to 8 people, additional per person)",
+        price: "R1999 (up to 8 people) + R150 per extra person",
         people: "Groups",
-        location: "On Location",
+        location: "📍 On Location",
         icon: Music,
         type: "book"
       },
@@ -60,7 +60,7 @@ const sections = [
         duration: "60 minutes",
         price: "From R800",
         people: "All Levels",
-        location: "On Location or In Studio",
+        location: "📍 On Location or In Studio (confirmed after booking)",
         icon: Music,
         type: "book"
       }
@@ -68,14 +68,14 @@ const sections = [
   },
   {
     title: "Studio Classes",
-    description: "Ongoing classes at the studio for local practitioners.",
+    description: "For local practitioners. Not heavily promoted as classes are already performing well.",
     packages: [
       {
         title: "Drop-in Class",
         duration: "60 minutes",
         price: "R130",
         people: "All Levels",
-        location: "In Studio (Ballito)",
+        location: "📍 In Studio (Ballito)",
         icon: Users,
         type: "book"
       }
@@ -84,22 +84,25 @@ const sections = [
 ];
 
 export default function Booking() {
+  const navigate = useNavigate();
+  const [selectedPackage, setSelectedPackage] = useState(null);
 
-  const handleBookingClick = (pkg) => {
+  const handleSelectPackage = (pkg) => {
     if (pkg.type === "enquire") {
-      window.location.href = "/contact";
+      navigate("/contact");
     } else {
-      window.open(CALENDLY_URL, "_blank");
+      setSelectedPackage(pkg);
+      setTimeout(() => {
+        document.getElementById("calendar-section")?.scrollIntoView({ 
+          behavior: "smooth" 
+        });
+      }, 100);
     }
-  };
-
-  const getButtonText = (pkg) => {
-    return pkg.type === "enquire" ? "Enquire" : "Book";
   };
 
   return (
     <div>
-      {/* HERO */}
+      {/* HERO with Ocean Wave Overlay */}
       <section className="relative h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -115,6 +118,7 @@ export default function Booking() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
             className="flex items-center justify-center gap-2 mb-4"
           >
             <Waves className="h-4 w-4 text-white/60" />
@@ -130,13 +134,13 @@ export default function Booking() {
         </div>
       </section>
 
-      {/* PACKAGES */}
+      {/* PACKAGES SECTION */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto space-y-16">
 
           {sections.map((section, idx) => (
             <div key={idx}>
-              {/* Section Heading */}
+              {/* Section Heading with Droplets */}
               <div className="mb-6 text-center">
                 <div className="flex justify-center mb-2">
                   <div className="w-12 h-px bg-ocean/30" />
@@ -146,12 +150,12 @@ export default function Booking() {
                 <h2 className="font-heading text-2xl md:text-3xl text-foreground">
                   {section.title}
                 </h2>
-                <p className="text-sm text-muted-foreground mt-2">
+                <p className="text-sm text-muted-foreground mt-2 max-w-2xl mx-auto">
                   {section.description}
                 </p>
               </div>
 
-              {/* Packages */}
+              {/* Packages with selected state highlight */}
               <div className="space-y-4">
                 {section.packages.map((pkg, i) => (
                   <motion.div
@@ -160,7 +164,11 @@ export default function Booking() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
-                    className="bg-card border border-border hover:border-ocean/30 p-6 rounded-sm transition-all duration-300 flex flex-col md:flex-row justify-between gap-4"
+                    className={`bg-card border p-6 rounded-sm transition-all duration-300 flex flex-col md:flex-row justify-between gap-4 
+                      ${selectedPackage?.title === pkg.title 
+                        ? "border-ocean shadow-md bg-ocean/5" 
+                        : "border-border hover:border-ocean/30"
+                      }`}
                   >
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
@@ -174,7 +182,7 @@ export default function Booking() {
                         <MapPin className="h-3 w-3" /> {pkg.location}
                       </p>
 
-                      <div className="flex gap-4 text-xs text-muted-foreground">
+                      <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
                         <span className="flex items-center gap-1">
                           <Clock className="h-3 w-3" /> {pkg.duration}
                         </span>
@@ -190,10 +198,14 @@ export default function Booking() {
                       </span>
 
                       <button
-                        onClick={() => handleBookingClick(pkg)}
-                        className="px-6 py-3 bg-ocean text-white text-xs uppercase tracking-widest hover:bg-ocean-dark transition rounded-sm"
+                        onClick={() => handleSelectPackage(pkg)}
+                        className={`px-6 py-3 text-xs uppercase tracking-widest transition rounded-sm whitespace-nowrap
+                          ${selectedPackage?.title === pkg.title 
+                            ? "bg-ocean-dark text-white" 
+                            : "bg-ocean text-white hover:bg-ocean-dark"
+                          }`}
                       >
-                        {getButtonText(pkg)}
+                        {pkg.type === "enquire" ? "Enquire" : "Choose Session"}
                       </button>
                     </div>
                   </motion.div>
@@ -204,39 +216,62 @@ export default function Booking() {
 
         </div>
 
-        {/* PAYMENT INFO */}
-        <div className="mt-16 text-center bg-ocean/5 border border-ocean/20 p-6 rounded-lg max-w-3xl mx-auto">
+        {/* CALENDLY SECTION - Only shows after package selection with animation */}
+        <div id="calendar-section" className="mt-16">
+          {selectedPackage ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="bg-ocean/5 border border-ocean/20 p-6 md:p-8 rounded-lg"
+            >
+              <div className="text-center mb-6">
+                <h3 className="font-heading text-xl md:text-2xl text-foreground">
+                  Choose Your Date & Time
+                </h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  You are booking: <span className="font-medium text-ocean">{selectedPackage.title}</span>
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  ⏱️ All sessions are 60 minutes
+                </p>
+              </div>
+
+              <CalendlyEmbed url={CALENDLY_URL} />
+
+              {/* Address requirement note */}
+              <p className="text-xs text-muted-foreground text-center mt-4">
+                📍 <span className="font-medium">Important:</span> You will be required to provide your address during booking for all on-location sessions.
+              </p>
+            </motion.div>
+          ) : (
+            <div className="text-center py-12 bg-muted/30 border border-border rounded-lg">
+              <Calendar className="h-10 w-10 text-ocean/40 mx-auto mb-3" />
+              <p className="text-muted-foreground text-sm">
+                Select a package above to begin your booking
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Payment Info */}
+        <div className="mt-12 text-center bg-ocean/5 border border-ocean/20 p-6 rounded-lg max-w-3xl mx-auto">
           <p className="text-sm text-muted-foreground">
             💳 <span className="text-ocean font-medium">Payment process:</span>{" "}
-            After booking, you will receive a confirmation email with a secure payment link.
+            After booking via Calendly, you will receive a confirmation email with a secure Yoco payment link.
             Your session is confirmed once payment is completed.
           </p>
         </div>
 
-        {/* CALENDLY */}
-        <div className="mt-20">
-          <div className="text-center mb-6">
-            <Calendar className="h-8 w-8 text-ocean/40 mx-auto mb-2" />
-            <h3 className="font-heading text-xl md:text-2xl text-foreground">
-              Select Your Date & Time
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              Choose your preferred time after selecting a package above
-            </p>
-          </div>
-
-          <CalendlyEmbed url={CALENDLY_URL} />
-        </div>
-
-        {/* CONTACT */}
+        {/* Contact */}
         <div className="mt-12 text-center">
-          <Link to="/contact" className="text-ocean hover:underline text-sm">
-            Need help? Contact us
+          <Link to="/contact" className="text-ocean hover:underline text-sm inline-flex items-center gap-1">
+            Need help? Contact us <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
       </section>
 
-      {/* QUOTE */}
+      {/* QUOTE SECTION */}
       <section className="relative py-12 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-ocean-dark/90" />
         <div className="relative text-center text-white">
