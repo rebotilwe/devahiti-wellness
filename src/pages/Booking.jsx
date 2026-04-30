@@ -20,12 +20,12 @@ import CalendlyEmbed from "../components/CalendlyEmbed";
 // Formspree endpoint
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyklpvwn";
 
-// Calendly links (UPDATED - using the correct working URLs)
+// Calendly links
 const CALENDLY_LINKS = {
   group: "https://calendly.com/cheryl-sayogasafaris/drop-in-class-clone",
   private: "https://calendly.com/cheryl-sayogasafaris/private-yoga-session",
   sound: "https://calendly.com/cheryl-sayogasafaris/sound-journey-clone",
-  combo: "https://calendly.com/cheryl-sayogasafaris/sound-journey-clone", // Same as sound until Thato creates separate
+  combo: "https://calendly.com/cheryl-sayogasafaris/sound-journey-clone",
 };
 
 const sections = [
@@ -84,7 +84,7 @@ const sections = [
   },
   {
     title: "Studio Classes",
-    description: "For local practitioners. Not heavily promoted as classes are already performing well.",
+    description: "For local practitioners. Drop-ins are only available during scheduled class times and must be booked directly with us.",
     icon: Users,
     packages: [
       {
@@ -94,8 +94,7 @@ const sections = [
         people: "All Levels",
         location: "📍 In Studio (Ballito)",
         icon: Users,
-        type: "book",
-        calendlyKey: "group"
+        type: "enquire"
       }
     ]
   }
@@ -173,9 +172,7 @@ export default function Booking() {
   };
 
   const getCalendlyUrl = (pkg) => {
-    const url = CALENDLY_LINKS[pkg.calendlyKey] || CALENDLY_LINKS.group;
-    console.log("Opening Calendly URL:", url); // Debug log
-    return url;
+    return CALENDLY_LINKS[pkg.calendlyKey] || CALENDLY_LINKS.group;
   };
 
   return (
@@ -367,12 +364,6 @@ export default function Booking() {
                           <Users className="h-3 w-3" /> {pkg.people}
                         </span>
                       </div>
-
-                      {pkg.type !== "enquire" && (
-                        <p className="text-xs text-ocean/70 mt-2">
-                          ⏱️ All sessions are 60 minutes
-                        </p>
-                      )}
                     </div>
 
                     <div className="flex items-center justify-between sm:justify-end gap-4 mt-3 sm:mt-0">
@@ -401,7 +392,7 @@ export default function Booking() {
 
       {/* STEP 3: CALENDLY SECTION */}
       <section id="calendar-section" className="py-8 sm:py-12 px-4 sm:px-6 max-w-4xl mx-auto">
-        {selectedPackage ? (
+        {selectedPackage && selectedPackage.type === "book" ? (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -415,19 +406,15 @@ export default function Booking() {
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 You are booking: <span className="font-medium text-ocean">{selectedPackage.title}</span>
               </p>
-              {selectedPackage.location?.includes("On Location") && (
-                <p className="text-xs text-muted-foreground mt-2">
-                  📍 We'll use the address you provided in your details
-                </p>
-              )}
+              <p className="text-xs text-muted-foreground mt-1">
+                ⏱️ All sessions are 60 minutes
+              </p>
             </div>
 
-            {/* Calendly Embed */}
             <div className="w-full overflow-x-auto">
               <CalendlyEmbed url={getCalendlyUrl(selectedPackage)} />
             </div>
 
-            {/* Fallback link in case embed doesn't load */}
             <div className="text-center mt-4 pt-4 border-t border-ocean/20">
               <p className="text-xs text-muted-foreground mb-2">
                 Having trouble seeing the calendar?
@@ -446,21 +433,14 @@ export default function Booking() {
               📍 <span className="font-medium">Important:</span> You will be required to provide your address during booking for all on-location sessions.
             </p>
           </motion.div>
-        ) : formSubmitted ? (
+        ) : selectedPackage && selectedPackage.type === "enquire" ? null : formSubmitted ? (
           <div className="text-center py-8 sm:py-12 bg-muted/30 border border-border rounded-lg">
             <Calendar className="h-8 w-8 sm:h-10 sm:w-10 text-ocean/40 mx-auto mb-3" />
             <p className="text-sm text-muted-foreground px-4">
               Select a session above to begin your booking
             </p>
           </div>
-        ) : (
-          <div className="text-center py-8 sm:py-12 bg-muted/30 border border-border rounded-lg">
-            <Calendar className="h-8 w-8 sm:h-10 sm:w-10 text-ocean/40 mx-auto mb-3" />
-            <p className="text-sm text-muted-foreground px-4">
-              Please complete your details first, then select a session
-            </p>
-          </div>
-        )}
+        ) : null}
       </section>
 
       {/* PAYMENT INFO */}
