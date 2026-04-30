@@ -50,13 +50,13 @@ const sections = [
       {
         title: "Private Yoga Session",
         description:
-          "Personalised sessions at your home or accommodation, tailored to your needs.",
+          "Personalised 1-on-1 session at your home or accommodation.",
         duration: "60 minutes",
-        price: "R650 + R150 per extra person",
-        location: "📍 On Location (Home / Accommodation)",
+        price: "R650 for 1 person, +R150 per extra person",
+        capacity: "1+ people",
+        location: "📍 On Location (Accommodation)",
         icon: Heart,
         type: "book",
-        capacity: "1–8 people",
         calendlyKey: "private"
       },
       {
@@ -76,11 +76,11 @@ const sections = [
         description:
           "A deeply restorative sound experience using healing frequencies and vibration.",
         duration: "60 minutes",
-        price: "From R800",
+        price: "R800 for 1 person, +R150 per extra person",
+        capacity: "1+ people",
         location: "📍 On Location or In Studio (confirmed after booking)",
         icon: Music,
         type: "book",
-        capacity: "All Levels",
         calendlyKey: "sound"
       }
     ]

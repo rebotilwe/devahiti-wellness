@@ -50,16 +50,16 @@ const sections = [
     description: "Perfect for holidaymakers from Johannesburg visiting Ballito.",
     icon: Heart,
     packages: [
-      {
-        title: "Private Yoga Session",
-        duration: "60 minutes",
-        price: "R650 (+R150 per extra person)",
-        people: "1–8 people",
-        location: "📍 On Location (Accommodation)",
-        icon: Heart,
-        type: "book",
-        calendlyKey: "private"
-      },
+    {
+  title: "Private Yoga Session",
+  duration: "60 minutes",
+  price: "R650 for 1 person, +R150 per extra person",  // ✅ UPDATE
+  people: "1+ people",
+  location: "📍 On Location (Accommodation)",
+  icon: Heart,
+  type: "book",
+  calendlyKey: "private"
+},
       {
         title: "Group Yoga & Sound Journey",
         duration: "60 minutes",
@@ -72,13 +72,13 @@ const sections = [
       },
       {
         title: "Sound Journey",
-        duration: "60 minutes",
-        price: "From R800",
-        people: "All Levels",
-        location: "📍 On Location or In Studio (confirmed after booking)",
-        icon: Music,
-        type: "book",
-        calendlyKey: "sound"
+  duration: "60 minutes",
+  price: "R800 for 1 person, +R150 per extra person",  // ✅ UPDATE
+  people: "1+ people",
+  location: "📍 On Location or In Studio (confirmed after booking)",
+  icon: Music,
+  type: "book",
+  calendlyKey: "sound"
       }
     ]
   },
