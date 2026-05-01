@@ -2,15 +2,19 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Waves, Droplets, Mail, Phone, MapPin } from "lucide-react";
 
+// Import client images
+import heroImg from "../assets/img7.jpg";      // Hero background image
+import philosophyImg from "../assets/img5.jpg"; // Philosophy section image
+
 export default function About() {
   return (
     <div>
-      {/* Hero */}
+      {/* Hero - REPLACED with img7 */}
       <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/3b13d11e7_generated_fbf80261.png"
-            alt="Yoga studio peaceful setting"
+            src={heroImg}
+            alt="Devahiti Yoga Studio"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/50" />
@@ -91,7 +95,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Philosophy (Cleaned as requested) */}
+      {/* Philosophy - REPLACED with img5 */}
       <section className="py-20 lg:py-32 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -100,8 +104,8 @@ export default function About() {
             viewport={{ once: true }}
           >
             <img
-              src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/b9d7d7c6d_generated_c5fd17b8.png"
-              alt="Yoga practice"
+              src={philosophyImg}
+              alt="Yoga practice with Cheryl"
               className="w-full rounded-lg"
             />
           </motion.div>

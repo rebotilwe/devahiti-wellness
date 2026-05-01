@@ -13,6 +13,9 @@ import {
 
 import SectionHeading from "../components/SectionHeading";
 
+// Import client image for hero background (using img6)
+import heroBg from "../assets/img6.jpg";
+
 // Calendly Links
 const CALENDLY_LINKS = {
   group: "https://calendly.com/cheryl-sayogasafaris/drop-in-class-clone",
@@ -127,11 +130,11 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* HERO */}
+      {/* HERO - REPLACED with img6 */}
       <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8a896dbea_generated_4254f10c.png"
+            src={heroBg}
             className="w-full h-full object-cover"
             alt="Yoga class"
           />
@@ -164,7 +167,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* SERVICES */}
+      {/* SERVICES - Keep all service card images as is */}
       <section className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto space-y-16 sm:space-y-20">
 

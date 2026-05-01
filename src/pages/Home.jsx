@@ -6,6 +6,11 @@ import SectionHeading from "../components/SectionHeading";
 import ServiceCard from "../components/ServiceCard";
 import FreeTrialPopup from "../components/FreeTrialPopup";
 
+// Import client images (place them in src/assets/images/)
+import philosophyImg from "../assets/img2.jpg";  // Yoga/massage action shot
+import quoteBgImg from "../assets/img3.jpg";    // Peaceful setting
+import trainingImg from "../assets/img4.JPG";   // Teacher training / studio shot
+
 const services = [
   {
     id: "group",
@@ -89,7 +94,7 @@ export default function Home() {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2 }}>
       
-      {/* HERO */}
+      {/* HERO - KEEP EXISTING IMAGE */}
       <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -190,8 +195,6 @@ export default function Home() {
               View Services
             </Link>
           </motion.div>
-
-          {/* ❌ FREE TRIAL TEXT REMOVED - Now handled by popup only */}
         </div>
 
         {/* Scroll Indicator */}
@@ -299,7 +302,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Philosophy Section */}
+      {/* Philosophy Section - REPLACED IMAGE */}
       <section className="py-20 lg:py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -312,8 +315,8 @@ export default function Home() {
               <div className="relative">
                 <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-ocean/30 rounded-tl-2xl" />
                 <img
-                  src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/b9d7d7c6d_generated_c5fd17b8.png"
-                  alt="Yoga practice"
+                  src={philosophyImg}
+                  alt="Yoga practice with Cheryl"
                   className="w-full max-w-md mx-auto lg:mx-0 object-cover relative z-10"
                 />
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-ocean/30 rounded-br-2xl" />
@@ -348,11 +351,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Quote Banner */}
+      {/* Quote Banner - REPLACED IMAGE */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8c2f17577_generated_c9d14796.png"
+            src={quoteBgImg}
             alt="Peaceful yoga setting"
             className="w-full h-full object-cover"
           />
@@ -379,9 +382,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Teacher Training CTA */}
-      <section className="py-20 lg:py-28 px-6 bg-ocean">
-        <div className="max-w-3xl mx-auto text-center">
+      {/* Teacher Training CTA - ADDED BACKGROUND IMAGE */}
+      <section className="relative py-20 lg:py-28 px-6 overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={trainingImg}
+            alt="Yoga teacher training"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-ocean/80" />
+        </div>
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -13,6 +13,9 @@ import {
 } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 
+// Import client image for hero background (if you want to replace)
+// import heroBg from "../assets/images/img1.jpg";
+
 // Calendly URL (for non-drop-in bookings only)
 const CALENDLY_URL = "https://calendly.com/cheryl-sayogasafaris";
 
@@ -92,13 +95,13 @@ export default function Events() {
   return (
     <div className="min-h-screen bg-background">
 
-      {/* HERO */}
+      {/* HERO - Keep existing image or replace with img1 */}
       <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8c2f17577_generated_c9d14796.png"
-            alt="Yoga studio peaceful setting"
             className="w-full h-full object-cover"
+            alt="Yoga studio peaceful setting"
           />
           <div className="absolute inset-0 bg-black/50" />
           <div className="absolute bottom-0 h-20 sm:h-32 w-full bg-gradient-to-t from-ocean/20 to-transparent" />
@@ -129,6 +132,7 @@ export default function Events() {
         </div>
       </section>
 
+      {/* (Rest of the component remains exactly the same) */}
       {/* TEACHER TRAINING HIGHLIGHT */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 bg-ocean text-center">
         <Award className="h-10 w-10 sm:h-12 sm:w-12 text-white/80 mx-auto mb-3 sm:mb-4" />
@@ -146,7 +150,7 @@ export default function Events() {
         </Link>
       </section>
 
-      {/* UPCOMING EVENTS (Free Trial removed) */}
+      {/* UPCOMING EVENTS */}
       <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <SectionHeading
