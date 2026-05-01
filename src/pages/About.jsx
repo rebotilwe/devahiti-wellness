@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, Waves, Droplets, Mail, Phone, MapPin } from "lucide-react";
 
 // Import client images
-import heroImg from "../assets/img7.jpg";      // Hero background image
-import philosophyImg from "../assets/img5.jpg"; // Philosophy section image
+import heroImg from "../assets/images/img7.jpg";
+import philosophyImg from "../assets/images/img5.jpg";
 
 export default function About() {
   return (

@@ -14,7 +14,7 @@ import {
 import SectionHeading from "../components/SectionHeading";
 
 // Import client image for hero background (using img6)
-import heroBg from "../assets/img6.jpg";
+import heroBg from "../assets/images/img6.jpg";
 
 // Calendly Links
 const CALENDLY_LINKS = {

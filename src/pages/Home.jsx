@@ -7,9 +7,9 @@ import ServiceCard from "../components/ServiceCard";
 import FreeTrialPopup from "../components/FreeTrialPopup";
 
 // Import client images (place them in src/assets/images/)
-import philosophyImg from "../assets/img2.jpg";  // Yoga/massage action shot
-import quoteBgImg from "../assets/img3.jpg";    // Peaceful setting
-import trainingImg from "../assets/img4.JPG";   // Teacher training / studio shot
+import philosophyImg from "../assets/images/img2.jpg";  // Yoga/massage action shot
+import quoteBgImg from "../assets/images/img3.jpg";    // Peaceful setting
+import trainingImg from "../assets/images/img4.jpg";   // Teacher training / studio shot
 
 const services = [
   {
