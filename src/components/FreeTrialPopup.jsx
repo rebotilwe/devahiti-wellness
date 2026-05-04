@@ -40,14 +40,14 @@ export default function FreeTrialPopup() {
             </h4>
 
             <p className="text-xs text-muted-foreground mt-1">
-              New to Devahiti? You’re welcome to join a free trial class.
+              New to Devahiti? You're welcome to join a free trial class.
             </p>
 
             <Link 
-              to="/booking" 
+              to="/contact" 
               className="inline-block mt-2 text-ocean text-xs font-medium hover:underline"
             >
-              View sessions →
+              Enquire about free trial →
             </Link>
           </div>
         </div>
