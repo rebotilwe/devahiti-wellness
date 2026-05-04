@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Waves, Droplets } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
+import { Link, useNavigate } from "react-router-dom";
 
 // ✅ Updated Formspree endpoint
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyklpvwn";
@@ -310,33 +311,6 @@ export default function Contact() {
               </form>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* Free Trial CTA */}
-      <section className="py-20 lg:py-28 px-6 bg-ocean">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Droplets className="h-10 w-10 text-white/40 mx-auto mb-4" />
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-white mb-4">
-              Try a Class for Free
-            </h2>
-            <p className="text-base text-white/70 leading-relaxed mb-8 max-w-2xl mx-auto">
-              We invite you to take a free trial class with us whenever you are ready to dip 
-              your toes into this beautiful practice that is yoga.
-            </p>
-            <a
-              href="/booking?type=free"
-              className="inline-flex px-10 py-4 bg-white text-ocean text-xs font-medium tracking-[0.3em] uppercase hover:bg-white/90 transition-all duration-300 rounded-sm"
-            >
-              Claim Your Free Class
-            </a>
-          </motion.div>
         </div>
       </section>
     </div>

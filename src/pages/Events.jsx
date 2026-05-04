@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   MapPin,
@@ -9,12 +9,15 @@ import {
   Clock,
   Users,
   Waves,
-  Droplets
+  Droplets,
+  Sparkles,
+  BookOpen,
+  Heart,
+  Brain,
+  Activity,
+  Leaf
 } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
-
-// Import client image for hero background (if you want to replace)
-// import heroBg from "../assets/images/img1.jpg";
 
 // Calendly URL (for non-drop-in bookings only)
 const CALENDLY_URL = "https://calendly.com/cheryl-sayogasafaris";
@@ -35,11 +38,11 @@ const upcomingEvents = [
   },
   {
     title: "300 Hour Advanced Teacher Training",
-    date: "May 2026",
+    date: "Starts June 13-14, 2026",
     location: "📍 Devahiti Yoga Studio, Ballito",
     description:
-      "Deepen your practice and teaching skills with our advanced certification program.",
-    price: "Enquire for pricing",
+      "Advanced 300-Hour Yoga Teacher Training designed for certified 200-hour yoga teachers looking to expand their knowledge and elevate their practice.",
+    price: "R2800 per weekend",
     icon: Award,
     bookingType: "enquire"
   },
@@ -52,6 +55,70 @@ const upcomingEvents = [
     price: "R800",
     icon: Sun,
     bookingType: "book"
+  }
+];
+
+// 300 Hour Training Modules
+const trainingModules = [
+  { 
+    title: "Anatomy of Energy", 
+    date: "June 13th & 14th", 
+    description: "The relationship between energy and health, quantum physics, koshas",
+    icon: Sparkles
+  },
+  { 
+    title: "Advanced Anatomy & Physiology", 
+    date: "July 18th & 19th", 
+    description: "Functional fitness, digestive health, intermittent fasting, ketosis & autophagy",
+    icon: Activity
+  },
+  { 
+    title: "Advanced Fascia Studies", 
+    date: "August 1st & 2nd", 
+    description: "The latest research and applications in yoga",
+    icon: Brain
+  },
+  { 
+    title: "Yoga & Somatic Psychology", 
+    date: "September 5th & 6th", 
+    description: "Intention setting, working within the framework of the Eight Limbs of Yoga, Samkhya",
+    icon: Heart
+  },
+  { 
+    title: "Advanced Pranayama & Activational Breathing", 
+    date: "October 10th & 11th", 
+    description: "Mudras, bandhas, kumbhaka, chakras, mantras & meditation",
+    icon: Waves
+  },
+  { 
+    title: "Advanced Philosophy", 
+    date: "November 14th & 15th", 
+    description: "Deep dive into yogic philosophy and texts",
+    icon: BookOpen
+  },
+  { 
+    title: "Advanced Ayurveda", 
+    date: "December 5th & 6th, plus January 16th", 
+    description: "The impact of doshas, gunas, five pranas, 14 major nadis, and the secrets of alchemy",
+    icon: Leaf
+  },
+  { 
+    title: "Specialized Training", 
+    date: "February 19th & 20th", 
+    description: "Yin, prenatal yoga, yoga for children and special needs groups, and the art of retreating",
+    icon: Users
+  },
+  { 
+    title: "Devahiti Hands-On Bodywork (Optional Extra)", 
+    date: "March 12th & 13th, plus March 19th & 20th", 
+    description: "Learn hands-on techniques to supplement your income. In-person only.",
+    icon: Heart
+  },
+  { 
+    title: "Trauma Sensitive Yoga", 
+    date: "April 16th & 17th", 
+    description: "Specialized training for working with trauma survivors",
+    icon: Brain
   }
 ];
 
@@ -74,6 +141,8 @@ const getEventButtonText = (event) => {
 };
 
 export default function Events() {
+  const navigate = useNavigate();
+
   const handleCalendlyBooking = () => {
     window.open(CALENDLY_URL, "_blank");
   };
@@ -95,7 +164,7 @@ export default function Events() {
   return (
     <div className="min-h-screen bg-background">
 
-      {/* HERO - Keep existing image or replace with img1 */}
+      {/* HERO */}
       <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -132,24 +201,6 @@ export default function Events() {
         </div>
       </section>
 
-      {/* (Rest of the component remains exactly the same) */}
-      {/* TEACHER TRAINING HIGHLIGHT */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-ocean text-center">
-        <Award className="h-10 w-10 sm:h-12 sm:w-12 text-white/80 mx-auto mb-3 sm:mb-4" />
-        <h2 className="font-heading text-xl sm:text-2xl text-white mb-2">
-          200hr & 300hr Teacher Training
-        </h2>
-        <p className="text-white/80 text-sm sm:text-base mb-4">
-          Starts May 2026
-        </p>
-        <Link
-          to="/contact"
-          className="inline-block px-5 sm:px-6 py-2 bg-white text-ocean text-[10px] sm:text-xs uppercase tracking-widest rounded-sm hover:bg-white/90 transition"
-        >
-          Enquire
-        </Link>
-      </section>
-
       {/* UPCOMING EVENTS */}
       <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
@@ -184,7 +235,7 @@ export default function Events() {
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <span className="text-ocean font-medium text-sm min-w-[80px] text-right">
+                    <span className="text-ocean font-medium text-sm min-w-[100px] text-right">
                       {event.price}
                     </span>
                     <button
@@ -197,6 +248,94 @@ export default function Events() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 300 HOUR ADVANCED TEACHER TRAINING DETAILS */}
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-ocean/5">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8 sm:mb-10">
+            <div className="flex justify-center mb-2">
+              <div className="w-8 sm:w-12 h-px bg-ocean/30" />
+              <Award className="h-4 w-4 sm:h-5 sm:w-5 text-ocean/40 mx-2" />
+              <div className="w-8 sm:w-12 h-px bg-ocean/30" />
+            </div>
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl text-foreground">
+              300 Hour Advanced Teacher Training
+            </h2>
+            <p className="text-lg text-ocean font-medium mt-2">Starts June 13th & 14th, 2026</p>
+            <p className="text-sm text-muted-foreground mt-2 max-w-3xl mx-auto">
+              Designed for certified 200-hour yoga teachers looking to expand their knowledge and elevate their practice.
+            </p>
+          </div>
+
+          {/* Why Choose This Training */}
+          <div className="bg-white rounded-lg p-6 mb-8 shadow-sm border border-ocean/10">
+            <h3 className="font-heading text-xl text-foreground mb-4 flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-ocean" />
+              Why Choose This Training?
+            </h3>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                <span className="text-ocean mt-0.5">✦</span>
+                <span><span className="font-medium text-foreground">New Research:</span> Explore the latest research in anatomy of energy, fascia, pain management, skeletal alignment, and therapeutic practices</span>
+              </li>
+              <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                <span className="text-ocean mt-0.5">✦</span>
+                <span><span className="font-medium text-foreground">Comprehensive Course Material:</span> Gain an advanced understanding of yoga, from philosophy to functional anatomy, somatic psychology to advanced Ayurveda</span>
+              </li>
+              <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                <span className="text-ocean mt-0.5">✦</span>
+                <span><span className="font-medium text-foreground">Hands-On Learning:</span> Master the exclusive Devahiti hands-on bodywork technique for pain management, fascial release, and skeletal alignment</span>
+              </li>
+              <li className="flex items-start gap-3 text-sm text-muted-foreground">
+                <span className="text-ocean mt-0.5">✦</span>
+                <span><span className="font-medium text-foreground">Affordable & Accessible:</span> No exams, no large upfront costs. Weekend module fee of R2800.00</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Course Modules */}
+          <h3 className="font-heading text-xl text-foreground mb-4 text-center">Course Modules</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[500px] bg-white rounded-lg overflow-hidden border border-ocean/10">
+              <thead className="bg-ocean text-white">
+                <tr>
+                  <th className="text-left py-3 px-4 font-heading text-sm sm:text-base">Module</th>
+                  <th className="text-left py-3 px-4 font-heading text-sm sm:text-base">Date</th>
+                  <th className="text-left py-3 px-4 font-heading text-sm sm:text-base">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {trainingModules.map((module, i) => (
+                  <tr key={i} className="border-b border-ocean/10 hover:bg-ocean/5 transition-colors">
+                    <td className="py-3 px-4 text-sm font-medium">{module.title}</td>
+                    <td className="py-3 px-4 text-sm text-muted-foreground whitespace-nowrap">{module.date}</td>
+                    <td className="py-3 px-4 text-sm text-muted-foreground">{module.description}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Schedule Info */}
+          <div className="mt-6 bg-ocean/10 border border-ocean/20 rounded-lg p-4 text-center">
+            <p className="text-sm text-foreground">
+              📍 Both Saturday and Sunday sessions start at <span className="font-medium">9:30am</span> and finish at <span className="font-medium">2:30pm</span> with a short 20-minute break.
+            </p>
+            <p className="text-sm text-foreground mt-2">
+              📚 Expect written assignments after each module. You will be required to do some research and be consistent with your attendance.
+            </p>
+          </div>
+
+          <div className="text-center mt-6">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-ocean text-white text-xs uppercase tracking-widest rounded-sm hover:bg-ocean-dark transition"
+            >
+              Enquire About 300 Hour Training <ArrowRight className="h-3 w-3" />
+            </Link>
           </div>
         </div>
       </section>
@@ -295,7 +434,7 @@ export default function Events() {
             New to Devahiti? Experience your first class with no obligation.
           </p>
           <button
-            onClick={handleCalendlyBooking}
+            onClick={() => navigate("/contact")}
             className="bg-white text-ocean px-6 sm:px-8 py-2.5 text-[10px] sm:text-xs uppercase tracking-widest rounded-sm hover:bg-white/90 transition"
           >
             Claim Free Class
