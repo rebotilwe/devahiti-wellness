@@ -64,17 +64,17 @@ const services = [
     image: corporateImg,  // ✅ Use imported variable
     bookingType: "corporate",
   },
-  {
-    id: "training",
-    title: "Teacher Training",
-    description:
-      "200hr & 300hr advanced yoga teacher training programs starting May 2026.",
-    duration: "Multi-month",
-    price: "Enquire for pricing",
-    location: "📍 In Studio",
-    image: trainingCardImg,  // ✅ Use imported variable
-    bookingType: "enquire",
-  },
+ {
+  id: "training",
+  title: "Teacher Training",
+  description:
+    "200hr starts May 16-17, 2026 | 300hr advanced training starts June 13-14, 2026",
+  duration: "Multi-month",
+  price: "Enquire for pricing",
+  location: "📍 In Studio",
+  image: trainingCardImg,
+  bookingType: "enquire",
+},
 ];
 
 const animatedWords = ["Breathe", "Center", "Align", "Flow", "Release", "Restore"];
@@ -408,12 +408,12 @@ export default function Home() {
                 <Star key={i} className="h-4 w-4 fill-white/30 text-white/30" />
               ))}
             </div>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-white mb-4">
-              200 hour & 300 hour Advanced Teacher Training
-            </h2>
-            <p className="text-xl text-white/80 mb-4">
-              200hr: Starts May 16-17, 2026 | 300hr: Starts May 2-3, 2026
-            </p>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-white mb-4">
+  200 hour & 300 hour Advanced Teacher Training
+</h2>
+<p className="text-xl text-white/80 mb-4">
+  200hr: Starts May 16-17, 2026 | 300hr: Starts June 13-14, 2026
+</p>
             <p className="text-base text-white/70 leading-relaxed mb-8 max-w-2xl mx-auto">
               Deepen your practice and become a certified instructor. Our comprehensive training programs 
               are rooted in science and time-honoured yogic principles.

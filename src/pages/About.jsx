@@ -193,15 +193,15 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-heading text-3xl md:text-4xl font-light text-foreground mb-4">
-              Upcoming Teacher Training
-            </h2>
-            <p className="text-base text-muted-foreground leading-relaxed mb-6">
-              200-hour training starts <span className="font-medium text-ocean">May 16-17, 2026</span> (until December 2026)
-            </p>
-            <p className="text-base text-muted-foreground leading-relaxed mb-8">
-              300-hour advanced training starts <span className="font-medium text-ocean">May 2-3, 2026</span> (12-month program)
-            </p>
+          <h2 className="font-heading text-3xl md:text-4xl font-light text-foreground mb-4">
+  Upcoming Teacher Training
+</h2>
+<p className="text-base text-muted-foreground leading-relaxed mb-6">
+  200-hour training starts <span className="font-medium text-ocean">May 16-17, 2026</span> (until December 2026)
+</p>
+<p className="text-base text-muted-foreground leading-relaxed mb-8">
+  300-hour advanced training starts <span className="font-medium text-ocean">June 13-14, 2026</span> (12-month program)
+</p>
             <Link
               to="/events"
               className="inline-flex items-center gap-2 px-6 py-3 border border-ocean/30 text-ocean text-xs uppercase tracking-widest hover:bg-ocean hover:text-white transition-all rounded-sm"
