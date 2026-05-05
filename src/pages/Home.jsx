@@ -6,11 +6,19 @@ import SectionHeading from "../components/SectionHeading";
 import ServiceCard from "../components/ServiceCard";
 import FreeTrialPopup from "../components/FreeTrialPopup";
 
-// Import client images (place them in src/assets/images/)
+// Import ALL client images from assets/images/
 import philosophyImg from "../assets/images/img2.jpg";  // Yoga/massage action shot
 import quoteBgImg from "../assets/images/img3.jpg";    // Peaceful setting
 import trainingImg from "../assets/images/img4.jpg";   // Teacher training / studio shot
 
+// Import service card images
+import groupImg from "../assets/images/img5.jpg";      // Group Yoga class image
+import privateImg from "../assets/images/img13.jpg";    // Private Yoga session image
+import soundImg from "../assets/images/img11.jpg";      // Sound Journey image
+import corporateImg from "../assets/images/img1.jpg";  // Corporate Yoga image
+import trainingCardImg from "../assets/images/img9.jpg"; // Teacher Training card image
+// Add this import at the top with your other imports
+import heroBgImg from "../assets/images/img5.jpg";  // Hero background image
 const services = [
   {
     id: "group",
@@ -20,8 +28,7 @@ const services = [
     duration: "60 min",
     price: "R130 drop-in",
     location: "📍 In Studio",
-    image:
-      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/c514b05a9_generated_8e04c8ff.png",
+    image: groupImg,  // ✅ Use imported variable
     bookingType: "group",
   },
   {
@@ -32,8 +39,7 @@ const services = [
     duration: "60 min",
     price: "R650 (+R150 per extra person)",
     location: "📍 On Location",
-    image:
-      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/0ce063086_generated_ab60dfbd.png",
+    image: privateImg,  // ✅ Use imported variable
     bookingType: "private",
   },
   {
@@ -44,8 +50,7 @@ const services = [
     duration: "60 min",
     price: "From R800",
     location: "📍 On Location",
-    image:
-      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/90b6a8f9b_generated_85845fa4.png",
+    image: soundImg,  // ✅ Use imported variable
     bookingType: "sound",
   },
   {
@@ -56,8 +61,7 @@ const services = [
     duration: "60 min",
     price: "R1999 (up to 8 people)",
     location: "📍 On Location",
-    image:
-      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8a896dbea_generated_4254f10c.png",
+    image: corporateImg,  // ✅ Use imported variable
     bookingType: "corporate",
   },
   {
@@ -68,8 +72,7 @@ const services = [
     duration: "Multi-month",
     price: "Enquire for pricing",
     location: "📍 In Studio",
-    image:
-      "https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/b9d7d7c6d_generated_c5fd17b8.png",
+    image: trainingCardImg,  // ✅ Use imported variable
     bookingType: "enquire",
   },
 ];
@@ -95,10 +98,11 @@ export default function Home() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2 }}>
       
       {/* HERO - KEEP EXISTING IMAGE */}
+          {/* HERO - REPLACED WITH CLIENT IMAGE (img1) */}
       <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8a896dbea_generated_4254f10c.png"
+            src={heroBgImg}
             className="w-full h-full object-cover"
             alt="Yoga Practice"
           />
@@ -302,7 +306,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Philosophy Section - REPLACED IMAGE */}
+      {/* Philosophy Section */}
       <section className="py-20 lg:py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -351,7 +355,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Quote Banner - REPLACED IMAGE */}
+      {/* Quote Banner */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -382,7 +386,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Teacher Training CTA - ADDED BACKGROUND IMAGE */}
+      {/* Teacher Training CTA */}
       <section className="relative py-20 lg:py-28 px-6 overflow-hidden">
         <div className="absolute inset-0">
           <img

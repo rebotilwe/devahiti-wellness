@@ -19,6 +19,9 @@ import {
 } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 
+// Import client image for hero background
+import heroEventsImg from "../assets/images/img10.jpg";  // Events page hero background
+
 // Calendly URL (for non-drop-in bookings only)
 const CALENDLY_URL = "https://calendly.com/cheryl-sayogasafaris";
 
@@ -164,11 +167,11 @@ export default function Events() {
   return (
     <div className="min-h-screen bg-background">
 
-      {/* HERO */}
+      {/* HERO - REPLACED WITH CLIENT IMAGE (img10) */}
       <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/8c2f17577_generated_c9d14796.png"
+            src={heroEventsImg}
             className="w-full h-full object-cover"
             alt="Yoga studio peaceful setting"
           />

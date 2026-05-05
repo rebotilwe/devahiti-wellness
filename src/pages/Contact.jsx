@@ -5,6 +5,9 @@ import { Waves, Droplets } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import { Link, useNavigate } from "react-router-dom";
 
+// Import client image for hero background
+import contactHeroImg from "../assets/images/img11.jpg";  // Contact page hero background
+
 // ✅ Updated Formspree endpoint
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyklpvwn";
 
@@ -54,11 +57,11 @@ export default function Contact() {
 
   return (
     <div>
-      {/* Hero with Ocean Wave Overlay */}
+      {/* Hero with Ocean Wave Overlay - REPLACED WITH CLIENT IMAGE */}
       <section className="relative h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://media.base44.com/images/public/69d8b9a35e6ab29a2127374b/3b13d11e7_generated_fbf80261.png"
+            src={contactHeroImg}
             alt="Peaceful yoga studio setting"
             className="w-full h-full object-cover"
           />
