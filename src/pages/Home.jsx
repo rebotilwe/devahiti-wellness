@@ -234,7 +234,7 @@ export default function Home() {
                 <p className="text-muted-foreground mb-3">Sessions at your location for teams & events</p>
                 <p className="text-xs text-ocean mb-4">📍 On Location • 60 min</p>
                 <p className="text-sm font-medium text-foreground mb-4">R1999 (up to 8 people)</p>
-                <Link to="/booking" className="inline-block bg-ocean text-white px-6 py-2 text-sm uppercase tracking-wider hover:bg-ocean-dark transition rounded-sm">
+                <Link to="/services" className="inline-block bg-ocean text-white px-6 py-2 text-sm uppercase tracking-wider hover:bg-ocean-dark transition rounded-sm">
                   View Packages
                 </Link>
               </div>
@@ -245,7 +245,7 @@ export default function Home() {
                 <p className="text-muted-foreground mb-3">Private yoga & sound sessions for holiday guests</p>
                 <p className="text-xs text-ocean mb-4">📍 At your accommodation • 60 min</p>
                 <p className="text-sm font-medium text-foreground mb-4">From R650</p>
-                <Link to="/booking" className="inline-block bg-ocean text-white px-6 py-2 text-sm uppercase tracking-wider hover:bg-ocean-dark transition rounded-sm">
+                <Link to="/services" className="inline-block bg-ocean text-white px-6 py-2 text-sm uppercase tracking-wider hover:bg-ocean-dark transition rounded-sm">
                   View Packages
                 </Link>
               </div>
